@@ -1,5 +1,6 @@
 package com.Pages;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,8 +57,18 @@ public class coupon_approval {
 	public WebElement filterbutton;
 	
 	@FindBy(xpath =  "//table//tbody//tr/td[4]")
-	public List<WebElement>statusdetailed; 
+	public  WebElement statusdetailed; 
 	
+	@FindBy (xpath="//strong")
+	public WebElement totalcoupon;
+	
+	@FindBy(xpath = "//table/tbody/tr")
+	public List<WebElement> totalcoupondetails;
+	
+	 
+	
+	 
+	 
 	public String getcurrentUrl(){
 		return driver.getCurrentUrl();
 	}
@@ -96,13 +107,29 @@ public class coupon_approval {
 	public boolean isfilterbuttonDisplayed() {
 		return filterbutton.isDisplayed();
 	}
-	public List<String>statusmessagedisplayed() {
-		List<String> statusList = new ArrayList<String>();
-		for(WebElement element:statusdetailed) {
-			String valueString = elementUtils.getText(element);
-			statusList.add(valueString);
-		}
-		return statusList;
-		}
+//	public List<String>statusmessagedisplayed() {
+//		List<String> statusList = new ArrayList<String>();
+//		for(WebElement element:statusdetailed) {
+//			String valueString = elementUtils.getText(element);
+//			statusList.add(valueString);
+//		}
+//		return statusList;
+//		}
+	public String gettotalcoupontext() {
+		return elementUtils.getText(totalcoupon).trim();
 
+	}
+
+	public int getDisplayedcouponcount() {
+		return elementUtils.getSize(totalcoupondetails);
+	}
+	public String getSearchfieldValue() {
+		return
+	 elementUtils.getAttributeValue(searchfield);
+	}
+	public boolean isstatusdetailsdisplayed() {
+		return
+				elementUtils.isDisplayed(statusdetailed);
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.Pages;
 
+import java.util.List;
+
 import org.apache.commons.io.serialization.ValidatingObjectInputStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,10 +46,22 @@ public class merchantpayouts {
 	@FindBy(xpath = " (//*[text()='Disburse Payout'])[1]")
 	public WebElement disbursepayoutElement;
 	
+	@FindBy(xpath ="//*[text()='Cancel']")
+	public WebElement cancelbutton;
+	
+	@FindBy(xpath ="//*[@class='lucide lucide-x w-5 h-5']")
+	public WebElement cancelicon;
+	
+	@FindBy(xpath=" (//table)[1]//tbody/tr")
+	public List<WebElement> activemerchanttable;
+	
+	@FindBy(xpath = " (//table)[2]//tbody/tr")
+	public List<WebElement> historicalsettlementtable;
+	
 	public void clickmerchantpayouts() {
 		elementUtils.clickElement(merchantpayoutElement);
 	}
-	public void clickrecordsettlement() {
+	public void clickrecordsettlement()      {
 		elementUtils.scrollAndClick(recordsettlementElement);
 	}
 	public void selecetinstitute() {
@@ -74,4 +88,17 @@ public class merchantpayouts {
 	public String getcurrentUrl(){
 		return driver.getCurrentUrl();
 	} 
+	public void clickclosebutton() {
+		elementUtils.clickElement(cancelbutton);
+	}
+	public void clickcloseicon() {
+		elementUtils.clickElement(cancelicon);
+	}
+	
+	public int getactivemerchantdetails() {
+		return elementUtils.getSize(activemerchanttable);
+	}
+	public int gethistoricalmerchanttabledetails() {
+		return elementUtils.getSize(historicalsettlementtable);
+	}
 }

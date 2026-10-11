@@ -1,24 +1,33 @@
-Feature:Corzzar application
-Scenario Outline:verify coupon approval module
-Given  admin is on the dashboard page
-When admin click the coupon approval module
-And admin search the coupon code in search field "<Couponcode>"
-And the displayed message depends on search code
-And admin verify the details "<Status>" and "<Displayedmessage>"
-And admin clear the couponapproval search field in  
-And admin using the filter option in search the details
-And admin select the pending option 
-And it should be displayed correct details
-And admin click the approve button the coupon approved for admin side
-And admin reject the coupon
-And  admin select the approved button
-And the approved button displayed correct details 
-And admin reject the discound details
-And admin select the  rejected button
-And the reject button should be displayed correct details
-Then admin click the apporve button
+Feature: Corzzar application
+@coupon
+  Scenario Outline: verify coupon approval module
+    Given admin is on the dashboard page
+    When admin click the coupon approval module
+    And admin search the coupon code in search field "<Couponcode>"
+    And the displayed message depends on search code
+    And admin verify the details "<Status>" and "<Displayedmessage>"
+    And admin verify the search field date "<Couponcode>"
+    And admin clear the couponapproval search field in
+    And admin using the filter option in search the details
+    And admin select the pending option
+    And it should be displayed correct details
+    And admin click the approve button the coupon approved for admin side and updata current data
+    And admin reject the coupon
+    And admin select the approved button
+    And the approved button displayed correct details
+    And admin reject the discound details and update current data
+    And admin select the  rejected button
+    And the reject button should be displayed correct details
+    Then admin click the apporve button and update current data
 
-Examples:
-|Couponcode|Status|Displayedmessage|
-|welcomeindia|invalid|No coupons found.|
-|WELCOME25|VALID|   |
+    Examples:
+      | Couponcode   | Status  | Displayedmessage  |
+      | 12345yty       | invalid | No coupons found. |
+      | @#@#$        | invalid | No coupons found. |
+      | welcomeindia | invalid | No coupons found. |
+      | WELCOME25    | VALID   |                   |
+@count
+  Scenario: verify total count and displayed count
+    Given user is on the institues moderation page
+    When admin click the institues moderation module
+    Then admin verify the coupon approval count and displayed details              |

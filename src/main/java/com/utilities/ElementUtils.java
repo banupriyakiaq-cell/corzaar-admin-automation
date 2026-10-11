@@ -1,4 +1,4 @@
-package com.utilities;
+ package com.utilities;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -13,17 +13,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -85,8 +89,13 @@ public class ElementUtils {
 	//GETTEXT
 	public String getText(WebElement element) {
 		WebElement webElement=waitForVisibilityOfElement(element);
- 		return element.getText();
+ 		return element.getText().trim();
 
+	}
+	//ATTRIBUTE 
+	
+	public String getAttributeValue(WebElement element) {
+		return element.getAttribute("value");
 	}
 	
 	//LIST
@@ -308,12 +317,20 @@ public  String getTextByXpath(String xpath) {
 
 	}
 	//SCROLL AND CLICK
-	public void scrollAndClick(WebElement element) {
+	public void scrollAndClick(WebElement element)   {
 		WebElement button=waitForVisibilityOfElement(element);
 		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView({block:'center'});",button);
-		 button=waitForElementToBeClickable(button);
-		button.click();
-	}
+ 		 WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(15));
+		 wait.ignoring(ElementClickInterceptedException.class).until(d->{
+			 WebElement clickable = waitForElementToBeClickable(button);
+			 clickable.click();
+			 return true;
+		 });
+		 
+		 }
+ 		 		
+		  
+	 
 	
 	//ACCEPT ALERT
 
@@ -485,6 +502,21 @@ public  String getTextByXpath(String xpath) {
 			throw new RuntimeException("SVG element index not found:"+index);
 		}
 	}
-
+	public String getElementText(WebElement element) {
+		return element.getText();
+	}
+	
+	//AFTERVALUELOADED
+public String getTextAfterValueLoaded( WebElement element) {
+	WebDriverWait wait =new WebDriverWait(driver, Duration.ofSeconds(20));
+	 return wait.ignoring(StaleElementReferenceException.class).     until(d-> {
+		 String text  =element.getText().trim();
+		 if( text .matches(".*TotalCourses:\\s*[1-9]\\d*.*") ) {
+			 return text;
+		 }
+			  return null;
+	 });
+			  
+	      
 }
-
+}

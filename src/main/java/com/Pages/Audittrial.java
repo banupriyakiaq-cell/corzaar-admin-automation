@@ -52,10 +52,19 @@ public WebElement InstitutesoptionElement;
 public WebElement invalidmessag;
 
 @FindBy(xpath = "//tbody/tr/td[3]//*[normalize-space()]")
-public List<WebElement> displayedmessagElement;
+public WebElement displayedmessagElement;
+
+@FindBy(xpath="//strong")
+public WebElement totalauditcount;
+
+@FindBy(xpath = "//table/tbody/tr")
+public List<WebElement> totalauditcountdetailsdisplayed;
 
 public String getcurrentUrl(){
 	return driver.getCurrentUrl();
+}
+public void clickfilterbutton() {
+	elementUtils.clickElement( fillterbutton);
 }
 public void clickaudittrail() {
 	elementUtils.clickElement(audittrail);
@@ -82,7 +91,7 @@ public void  clickbatchesoption() {
 	elementUtils.clickElement(batchesoptionElement);
 }
 public void  clickcoursseoption() {
-	elementUtils.clickElement(CoursesoptionElement);
+	elementUtils.scrollAndClick(CoursesoptionElement);
 }
 public void  clickInstitutesoption() {
 	elementUtils.clickElement(InstitutesoptionElement);
@@ -90,12 +99,29 @@ public void  clickInstitutesoption() {
 public String getinvalidmessage() {
 	return elementUtils.getText(invalidmessag);
 }
-public List<String>statusmessagedisplayed() {
-	List<String> statusList = new ArrayList<String>();
-	for(WebElement element:displayedmessagElement) {
-		String valueString = elementUtils.getText(element);
-		statusList.add(valueString);
-	}
-	return statusList;
-	}
+//public List<String>statusmessagedisplayed() {
+//	List<String> statusList = new ArrayList<String>();
+//	for(WebElement element:displayedmessagElement) {
+//		String valueString = elementUtils.getText(element);
+//		statusList.add(valueString);
+//	}
+//	return statusList;
+//	}
+public String getSearchfieldValue() {
+	return
+ elementUtils.getAttributeValue(searchfield);
+}
+public String gettotalaudittext() {
+	return elementUtils.getText(totalauditcount).trim();
+
+}
+
+public int getDisplayedauditcount() {
+	return elementUtils.getSize(totalauditcountdetailsdisplayed);
+}
+
+public boolean issystemmoduledisplayed() {
+	return
+			elementUtils.isDisplayed(displayedmessagElement);
+}
 }

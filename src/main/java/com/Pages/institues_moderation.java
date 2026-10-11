@@ -28,11 +28,10 @@ public class institues_moderation {
 
 	@FindBy(xpath = "//*[@placeholder='Search institutes or cities...']")
 	public WebElement searchfield;
-  
+
 	@FindBy(xpath = "//*[@placeholder='Search institutes or cities...']")
 	public WebElement searchbox;
 
-	
 	@FindBy(xpath = "//*[@placeholder='Search institutes or cities...']")
 	public WebElement placefield;
 
@@ -51,7 +50,7 @@ public class institues_moderation {
 	@FindBy(xpath = "//span[text()='Approve']")
 	public WebElement approvebutton;
 
-	@FindBy(xpath = " (//button[normalize-space()='Reject'])[1]")
+	@FindBy(xpath = "(//button[.//span[normalize-space()='Reject']][1])[1]")
 	public WebElement rejectbutton;
 
 	@FindBy(xpath = "//td[normalize-space()='No matching institutes found.']")
@@ -61,17 +60,31 @@ public class institues_moderation {
 	public WebElement displayedmessagElement;
 
 	@FindBy(xpath = "//table/tbody//tr/td[4]")
-	public List<WebElement> textElement;
+	public WebElement textElement;
 	
+	@FindBy(xpath = " //table/tbody//tr")
+	public List<WebElement> displayeddataElement;
+
 	@FindBy(xpath = "//*[normalize-space()='Bengaluru']")
 	public WebElement placeResult;
 
+	@FindBy(xpath = "//table/tbody/tr")
+	public List<WebElement> displayedcourse;
+
+	@FindBy(xpath = "//strong")
+	public WebElement totalinstitutescount;
+
+	@FindBy(xpath = "//table/tbody/tr")
+	public List<WebElement> totalinstitutedisplayed;
+
 	public void clicktheinstituesmoderation() {
-		elementUtils. scrollAndClick(institutesmoderation);
+		elementUtils.scrollAndClick(institutesmoderation);
 	}
-	public void  clearsearchfield() {
-		elementUtils. scrollAndClick(searchbox);
+
+	public void clearsearchfield() {
+		elementUtils.scrollAndClick(searchbox);
 	}
+
 	public void entersearch(String institutename) {
 		elementUtils.sendKeys(searchfield, institutename);
 	}
@@ -102,7 +115,7 @@ public class institues_moderation {
 	}
 
 	public void clickthereject() {
-		elementUtils.clickElement(rejectbutton);
+		elementUtils.scrollAndClick(rejectbutton);
 	}
 
 	public String getcurrentUrl() {
@@ -116,16 +129,42 @@ public class institues_moderation {
 	public String getdisplayedmessage() {
 		return elementUtils.getText(displayedmessagElement);
 	}
+
 	public String getplaceresult() {
 		return elementUtils.getText(placeResult);
 	}
-	public List<String> getvaliddisplayedmessage() {
-		List<String> statusList = new ArrayList<String>();
-		for(WebElement element:textElement) {
-			String valueString = elementUtils.getText(element);
-			statusList.add(valueString);
-		}
-		return statusList;
-		}
- 	}
+
+//	public List<String> getvaliddisplayedmessage() {
+//		List<String> statusList = new ArrayList<String>();
+//		for (WebElement element : textElement) {
+//			String valueString = elementUtils.getText(element);
+//			statusList.add(valueString);
+//		}
+//		return statusList;
+//	}
+
+	public int gettotalcoursedetails() {
+		return elementUtils.getSize(displayedcourse);
+	}
+	 
+	public  String gettotalinstitutedetails() {
+		return elementUtils.getText(totalinstitutescount).trim();
+	}
+	public int getDisplayedinstitutecount() {
+		return elementUtils.getSize(totalinstitutedisplayed);
+	}
+
+	public String getSearchfieldValue() {
+		return
+	 elementUtils.getAttributeValue(searchfield );
+	}
+	public boolean isstatusdetailsdisplayed() {
+		return
+				elementUtils.isDisplayed(textElement);
+	}
+	public int getapprovedinstitutescount() {
+		 
+		 return elementUtils.getSize(displayeddataElement);
+	}
+	}
 

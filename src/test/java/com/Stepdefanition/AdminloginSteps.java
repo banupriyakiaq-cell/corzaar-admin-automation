@@ -48,17 +48,96 @@ public class AdminloginSteps {
 	}
 	@Then("user verify the {string} and {string}")
 	public void user_verify_the_and(String  status, String message) {
-		System.out.println("Status:"+status);
-		System.out.println("Message:"+message);
+
+
 	    if(status.equalsIgnoreCase("failed")) {
 	    	String actualMessage=log.getvalidationMessage();
-	   System.out.println("Expected Message:"+message);
-	   System.out.println("Actual Message:"+actualMessage);
-	    	Assert.assertEquals(actualMessage,message);
-	    }
+	    System.out.println("Expected Message:"+message);
+	    System.out.println("Actual Message:"+message);
+
+	    Assert.assertEquals(actualMessage.trim(),message.trim(),"invalid lodin mismatch");
+	    }else if
+	    (status.equalsIgnoreCase("empty")) {
+	    	String actualMessage;
+	    	if
+	    	(message.equalsIgnoreCase("Email")) {
+	    	  actualMessage=log.getEmailValidationMessage();
+	    }else if 
+	    (message.equalsIgnoreCase("Password")) {
+		actualMessage=log.getpasswordValidationMessage();
+				
+		}else {
+			throw new
+			IllegalArgumentException("Unknown field:"+message);
+		}
+	    System.out.println("validation Message:"+actualMessage);
+	    Assert.assertNotNull(actualMessage,message+"validation message null");
+			
+	    	 Assert.assertFalse(actualMessage.isEmpty(),message +"valiation message is empty");
+	    } 
+	}
+	 
+	@When("admin enter the password {string}")
+	public void admin_enter_the_password(String password) {
+		log.enterPassword(password);
+		}
+	@When("click the aunthendicate with empty email")
+	public void click_the_aunthendicate_with_empty_email() {
+	    log.clickauthendicateWithEmptyEmail();
+	}
+	@Then("admin should see the email validation message")
+	public void admin_should_see_the_email_validation_message() {
+	     String actualmessage  =log.getEmailValidationMessage();
+	     System.out.println("Email ValidationMessage:"+actualmessage);
+	     Assert.assertNotNull(actualmessage,"Email Validation message is null");
+	     Assert.assertFalse(actualmessage.isEmpty(),"Email Validation message is empty");
 	}
 
- 
+	@When("admin enter the  emailid {string}")
+	public void admin_enter_the_emailid(String email) {
+		 log.enterEmailid(email);
+
+	}
+	@When("click the aunthendicate with empty password")
+	public void click_the_aunthendicate_with_empty_password() {
+	    log. clickauthendicateWithEmptyPassword();
+	}
+	@Then("admin should see the password validation message")
+	public void admin_should_see_the_password_validation_message() {
+		String actualmessage  =log.getpasswordValidationMessage();
+	     System.out.println("Password ValidationMessage:"+actualmessage);
+	     Assert.assertNotNull(actualmessage,"Password Validation message is null");
+	     Assert.assertFalse(actualmessage.isEmpty(),"Password Validation message is empty");
+	}
+	
+	@When("admin enter the emailids {string}")
+	public void admin_enter_the_emailids(String email) {
+	     log.enterEmailid(email);
+	}
+
+	@When("admin enter tha password {string}")
+	public void admin_enter_tha_password(String password) {
+	     log.enterPassword(password);
+	}
+
+	@When("click the anuthenticatebutton")
+	public void click_the_anuthenticatebutton() {
+	     log.clickauthendicatebutton();
+	}
+
+	@When("and admin clicks verify with empty OTP")
+	public void and_admin_clicks_verify_with_empty_otp() {
+	     log.clicksubmitbutton();
+	}
+
+	@Then("admin should see the otp validation messahe")
+	public void admin_should_see_the_otp_validation_messahe() {
+		String actualmessage  =log.getotpValidationMessage();
+	     System.out.println("OTP ValidationMessage:"+actualmessage);
+	     Assert.assertNotNull(actualmessage,"Otp Validation message is null");
+	     Assert.assertFalse(actualmessage.isEmpty(),"Otp Validation message is empty"); 
+	}
+
  	 @And("Admin is on the 2FA verification page")
 	public void admin_is_on_the_2fa_verification_page() {
 		log=new Adminlogin(DriverFactory.getDriver());
@@ -72,7 +151,7 @@ public class AdminloginSteps {
 	}
 
 	@When("admin click the verify button")
-	public void admin_click_the_verify_button() {
+	public void admin_click_the_verify_button()   {
 	   log.clicksubmitbutton();
 	}
 

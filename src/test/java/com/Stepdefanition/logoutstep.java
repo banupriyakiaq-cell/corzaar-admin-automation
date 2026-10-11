@@ -17,7 +17,7 @@ public class logoutstep {
 
 private logout lt = new logout(DriverFactory.getDriver());
 @Given("admin in dashboard page")
-public void admin_in_dashboard_page() {
+public void admin_in_dashboard_page()   {
 	DriverFactory.getDriver().get(ConfigReader.getProperty("url"));
 	Adminlogin log = new Adminlogin(DriverFactory.getDriver());
 	log.clicktheadminbutton();
@@ -27,15 +27,16 @@ public void admin_in_dashboard_page() {
 
 @When("admin click the logout button")
 public void admin_click_the_logout_button() {
-	
-      String actualURL=lt.getcurrentUrl();
-	    System.out.println("Actual URL:"+actualURL);
-	    Assert.assertTrue(actualURL.contains("courses"));
+	lt.clicklogoutbutton();
+       
 }
 
 @Then("admin navigate to login page")
 public void admin_navigate_to_login_page() {
-    
+	String actualURL=lt.getcurrentUrl();
+    System.out.println("Actual URL:"+actualURL);
+    Assert.assertTrue(actualURL.contains("login"));
+
 }
 
 

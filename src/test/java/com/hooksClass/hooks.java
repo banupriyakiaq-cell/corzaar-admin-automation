@@ -36,23 +36,23 @@ public class hooks {
 	
 	
 
-	@After()
-	public void tearDown(Scenario scenario) {
-		WebDriver driver = driverFactory.getDriver();
-		if (scenario.isFailed() && driver != null) {
-
-		byte[] screenshotAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-
-			scenario.attach(screenshotAs, "image/png", "Failed Screenhot");
-
-		}
-
-	if (driver != null) {
-	driver.quit();
-		DriverFactory.unload();
-		}
-
-	}
+//	@After()
+//	public void tearDown(Scenario scenario) {
+//		WebDriver driver = driverFactory.getDriver();
+//		if (scenario.isFailed() && driver != null) {
+//
+//		byte[] screenshotAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//
+//			scenario.attach(screenshotAs, "image/png", "Failed Screenhot");
+//
+//		}
+//
+//	if (driver != null) {
+//	driver.quit();
+//		DriverFactory.unload();
+//		}
+//
+//	}
 
 }                 
 

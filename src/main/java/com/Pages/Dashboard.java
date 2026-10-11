@@ -29,6 +29,12 @@ public class Dashboard {
 	@FindBy(xpath = "//a[.//span[normalize-space()='Institute Approvals']]")
 	public WebElement  institutrapprovel;
 	
+	@FindBy(xpath = "//span[normalize-space()='Accredited Institutes']/ancestor :: div[contains(@class,'rounded-2xl')][1]/span[contains(@class,'text-2xl')]")
+	public WebElement accreditedinstitutes;
+	
+	@FindBy(xpath = "//span[normalize-space()='Published Courses']/ancestor::div[contains(@class,'rounded-2xl')]/span[contains(@class,'text-2xl')]")
+	public WebElement PublishedCourses;
+	
 	public void clickpecdingcourse() {
 		elementUtils.clickElement(pendingcours);
 	}
@@ -46,6 +52,16 @@ public class Dashboard {
 	}
 	public void navigateBack() {
 		driver.navigate().back();
+	}
+	public int getAccreditedInstitutescount() {
+		 
+		String count = elementUtils.getText(accreditedinstitutes).trim();
+		return Integer.parseInt(count);
+	}
+	public int getpublisedcoursescount() {
+		 
+		String count = elementUtils.getText(PublishedCourses).trim();
+		return Integer.parseInt(count);
 	}
 	}
 

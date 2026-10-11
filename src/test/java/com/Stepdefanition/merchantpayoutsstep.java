@@ -16,34 +16,27 @@ import io.cucumber.java.en.When;
 
 public class merchantpayoutsstep {
 	private merchantpayouts mp = new merchantpayouts(DriverFactory.getDriver());
-    
-	
-	
- 	@Given("admin is on tha dashboard page agin")
-	public void admin_is_on_tha_dashboard_page_agin() {
+    @Given("admin is on tha dashboard page agin")
+	public void admin_is_on_tha_dashboard_page_agin()   {
  		DriverFactory.getDriver().get(ConfigReader.getProperty("url"));
 		Adminlogin log = new Adminlogin(DriverFactory.getDriver());
 		log.clicktheadminbutton();
 		Dashboard dashboard = log.doLogin(ConstantUtils.EMAILID, ConstantUtils.PASSWORD, ConstantUtils.OTP);
-	  
-
-	}
+	  }
 
 	@When("admin click the merchant payment module")
 	public void admin_click_the_merchant_payment_module() {
 		mp.clickmerchantpayouts();
 		String actualURL=mp.getcurrentUrl();
 	    System.out.println("Actual URL:"+actualURL);
-	    Assert.assertTrue(actualURL.contains("courses"));
-
-	}
+	    Assert.assertTrue(actualURL.contains("payouts"));
+	    }
 
 	@When("admin verify the record settlement popup window")
-	public void admin_verify_the_record_settlement_popup_window() {
+	public void admin_verify_the_record_settlement_popup_window()  {
 		mp.clickrecordsettlement();
 	     Assert.assertTrue(mp.isrecordsettlementDisplayed());
-
-	}
+	     }
 
 	@When("admin select the institute or merchant recipient")
 	public void admin_select_the_institute_or_merchant_recipient() {
@@ -75,6 +68,18 @@ public class merchantpayoutsstep {
 
 
 	}
+	@When("admin click the record settlement open the popup window and click the close button")
+	public void admin_click_the_record_settlement_open_the_popup_window_and_click_the_close_button() {
+		mp.clickrecordsettlement();
+		mp.clickclosebutton();
+	}
+
+	@When("admin click the record settlement open the popup window and click the close icon")
+	public void admin_click_the_record_settlement_open_the_popup_window_and_click_the_close_icon() {
+		mp.clickrecordsettlement();
+		mp.clickcloseicon();
+	}
+
 
 	@When("admin click the disburse payout option")
 	public void admin_click_the_disburse_payout_option() {
@@ -117,7 +122,10 @@ public class merchantpayoutsstep {
 
 	@Then("verify the settlement details should be added")
 	public void verify_the_settlement_details_should_be_added() {
-	     
+	     int historycount =mp.gethistoricalmerchanttabledetails();
+	     System.out.println("Historical Settlement Count:"+historycount);
+	     Assert.assertTrue(historycount>0,"Historical Settlement table has no records");
+	     System.out.println("Active merchant count:"+mp.getactivemerchantdetails());
 	}
 
 }

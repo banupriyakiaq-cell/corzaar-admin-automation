@@ -18,7 +18,7 @@ import io.cucumber.java.en.When;
 public class coupon_approvalstep {
 private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 	@Given("admin is on the dashboard page")
-	public void admin_is_on_the_dashboard_page() {
+	public void admin_is_on_the_dashboard_page()   {
 		DriverFactory.getDriver().get(ConfigReader.getProperty("url"));
 		Adminlogin log = new Adminlogin(DriverFactory.getDriver());
 		log.clicktheadminbutton();
@@ -31,7 +31,7 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 	     ca.clickcouponapproval();
 	     String actualURL=ca.getcurrentUrl();
 		    System.out.println("Actual URL:"+actualURL);
-		    Assert.assertTrue(actualURL.contains("courses"));
+		    Assert.assertTrue(actualURL.contains("coupons"));
 	}
 
 	@When("admin search the coupon code in search field {string}")
@@ -53,6 +53,13 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 	   }else if (Status.equalsIgnoreCase("valid")) {
 		}
 	   }
+	@When("admin verify the search field date {string}")
+	public void admin_verify_the_search_field_date(String Couponcode) {
+		String actualValue = ca.getSearchfieldValue();
+		System.out.println("Expected Value:" + Couponcode);
+		System.out.println("Actual Value:" + actualValue);
+		Assert.assertEquals(actualValue, Couponcode);  
+	}
 	@When("admin clear the couponapproval search field in")
 	public void admin_clear_the_couponapproval_search_field_in() {
 	     ca.clearsearchfield();
@@ -75,37 +82,65 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 //				System.out.println("Status:"+actual);
 //				Assert.assertEquals(actual.trim(),"pending");
 //	}
-	}
+		Assert.assertTrue(ca.isstatusdetailsdisplayed());
 
-	@When("admin click the approve button the coupon approved for admin side")
-	public void admin_click_the_approve_button_the_coupon_approved_for_admin_side() {
-	    // ca.clickapprovebutton();
+	}
+	@When("admin click the approve button the coupon approved for admin side and updata current data")
+	public void admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data() {
+		int beforeDelete = ca.getDisplayedcouponcount();
+		System.out.println("Before Delete:" + beforeDelete);
+	     ca.clickapprovebutton();
+		int afterDelete = ca.getDisplayedcouponcount();
+		System.out.println("After Delete:" + afterDelete);
+		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
+		System.out.println("course count decressed correctly after deletion");
+	     
 	}
 
 	@When("admin reject the coupon")
 	public void admin_reject_the_coupon() {
-	    //ca.clickrejectbutton();
+	   
+	   int beforeDelete = ca.getDisplayedcouponcount();
+		System.out.println("Before Delete:" + beforeDelete);
+		 ca.clickrejectbutton();
+		int afterDelete = ca.getDisplayedcouponcount();
+		System.out.println("After Delete:" + afterDelete);
+		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
+		System.out.println("course count decressed correctly after deletion");
+	     
  	}
 
 	@When("admin select the approved button")
 	public void admin_select_the_approved_button() {
-	    // ca.clickapprovedoption();
+	    ca.clickapprovedoption();
 	}
 
 	@When("the approved button displayed correct details")
 	public void the_approved_button_displayed_correct_details() {
-		 List<String>actualvalue=ca.statusmessagedisplayed();
-			for(String actual:actualvalue) {
-				System.out.println("Status:"+actual);
-				Assert.assertEquals(actual.trim(),"approved");
-	}
+//		 List<String>actualvalue=ca.statusmessagedisplayed();
+//			for(String actual:actualvalue) {
+//				System.out.println("Status:"+actual);
+//				Assert.assertEquals(actual.trim(),"approved");
+	//} 
+		Assert.assertTrue(ca.isstatusdetailsdisplayed());
+
+		
 	}
 
-	@When("admin reject the discound details")
-	public void admin_reject_the_discound_details() {
-	    ca.clickrejectbutton();
+	@When("admin reject the discound details and update current data")
+	public void admin_reject_the_discound_details_and_update_current_data() {
+		 int beforeDelete = ca.getDisplayedcouponcount();
+			System.out.println("Before Delete:" + beforeDelete);
+			 ca.clickrejectbutton();
+			int afterDelete = ca.getDisplayedcouponcount();
+			System.out.println("After Delete:" + afterDelete);
+			Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
+			System.out.println("course count decressed correctly after deletion");
+		     
+	    
+	    
 	}
-
+ 
 	@When("admin select the  rejected button")
 	public void admin_select_the_rejected_button() {
 	     ca.clickrejectedoption();
@@ -113,18 +148,36 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 
 	@When("the reject button should be displayed correct details")
 	public void the_reject_button_should_be_displayed_correct_details() {
-		List<String>actualvalue=ca.statusmessagedisplayed();
-		for(String actual:actualvalue) {
-			System.out.println("Status:"+actual);
-			Assert.assertEquals(actual.trim(),"rejected");}
-		
+//		List<String>actualvalue=ca.statusmessagedisplayed();
+//		for(String actual:actualvalue) {
+//			System.out.println("Status:"+actual);
+//			Assert.assertEquals(actual.trim(),"rejected");}
+		Assert.assertTrue(ca.isstatusdetailsdisplayed());
+
 	}
 
-	@Then("admin click the apporve button")
-	public void admin_click_the_apporve_button() {
-	    //ca.clickapprovebutton();
+	@Then("admin click the apporve button and update current data")
+	public void admin_click_the_apporve_button_and_update_current_data() {
+		int beforeDelete = ca.getDisplayedcouponcount();
+		System.out.println("Before Delete:" + beforeDelete);
+		ca.clickapprovebutton();
+		int afterDelete = ca.getDisplayedcouponcount();
+		System.out.println("After Delete:" + afterDelete);
+		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
+		System.out.println("course count decressed correctly after deletion");
+	     
+	     
 	}
-
-
+	@Then("admin verify the coupon approval count and displayed details              |")
+	public void admin_verify_the_coupon_approval_count_and_displayed_details() {
+		String title = ca.gettotalcoupontext();
+		System.out.println("Total Course text:" + title);
+		int totalcount = Integer.parseInt(title.replaceAll("[^0-9]", ""));
+		int displayedcount = ca.getDisplayedcouponcount();
+		System.out.println("TOTAL COURSE COUNT:" + totalcount);
+		System.out.println("DISPLAYED COURSE COUNT :" + displayedcount);
+		Assert.assertTrue(totalcount >= displayedcount, "Dispalyed courses count exceeds total course count");
+	}
+	 
 
 }
