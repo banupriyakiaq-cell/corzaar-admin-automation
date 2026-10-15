@@ -69,51 +69,50 @@ public void admin_use_the_filter_option() {
 
 @When("admin select the course option")
 public void admin_select_the_course_option() {
-		ap.clickcoursseoption();
+     ap.clickcoursseoption();
 }
 
-@When("verify the displayed result detils")
-public void verify_the_displayed_result_detils() {
-//	List<String>actualvalue=ap.statusmessagedisplayed();
-//	for(String actual:actualvalue) {
-//		System.out.println("Status:"+actual);
-//		Assert.assertEquals(actual.trim(),"Courses");
-//}
-	Assert.assertTrue(ap.issystemmoduledisplayed());
-
+@When("verify the displayed result detils {string}")
+public void verify_the_displayed_result_detils(String courses)  {
+	List<String>actualvalue=ap.statusmessagedisplayed();
+	for(String actual:actualvalue) {
+		System.out.println("Status:"+actual);
+		Assert.assertEquals(actual.trim(),"Courses");
+}
+ 
  }
 
 @When("admin select the  payouts option")
 public void admin_select_the_payouts_option() {
-	//ap.clickpayoutoption();
+	 ap.clickpayoutoption();
  }
 
-@When("verify  payout details displayed correctly")
-public void verify_payout_details_displayed_correctly() {
-//	List<String>actualvalue=ap.statusmessagedisplayed();
-//	for(String actual:actualvalue) {
-//		System.out.println("Status:"+actual);
-//		Assert.assertEquals(actual.trim(),"Payouts");
-//	}
-	Assert.assertTrue(ap.issystemmoduledisplayed());
+@When("verify  payout details displayed correctly {string}")
+public void verify_payout_details_displayed_correctly(String payouts) {
+	List<String>actualvalue=ap.statusmessagedisplayed();
+	for(String actual:actualvalue) {
+		System.out.println("Status:"+actual);
+		Assert.assertEquals(actual.trim(),"Payouts");
+	}
+	 
 
  }
 
  
 
 @When("admin select the  batches option")
-public void admin_select_the_batches_option() {
+public void admin_select_the_batches_option(){
 	ap.clickbatchesoption();
  }
 
-@When("verify  batches details displayed correctly")
-public void verify_batches_details_displayed_correctly() {
-//	List<String>actualvalue=ap.statusmessagedisplayed();
-//	for(String actual:actualvalue) {
-//		System.out.println("Status:"+actual);
-//		Assert.assertEquals(actual.trim(),"Batches");
-//	}
-	Assert.assertTrue(ap.issystemmoduledisplayed());
+@When("verify  batches details displayed correctly {string}")
+public void verify_batches_details_displayed_correctly(String string) {
+	List<String>actualvalue=ap.statusmessagedisplayed();
+	for(String actual:actualvalue) {
+		System.out.println("Status:"+actual);
+		Assert.assertEquals(actual.trim(),"Batches");
+	}
+	 
 
  }
   
@@ -123,30 +122,30 @@ public void admin_select_the_institute_option() {
 	ap.clickInstitutesoption();
  }
 
-@When("verify  institute details displayed correctly")
-public void verify_institute_details_displayed_correctly() {
-//	List<String>actualvalue=ap.statusmessagedisplayed();
-//	for(String actual:actualvalue) {
-//		System.out.println("Status:"+actual);
-//		Assert.assertEquals(actual.trim(),"Institutes");
-//	}
-	Assert.assertTrue(ap.issystemmoduledisplayed());
+@When("verify  institute details displayed correctly {string}")
+public void verify_institute_details_displayed_correctly(String string){
+	List<String>actualvalue=ap.statusmessagedisplayed();
+	for(String actual:actualvalue) {
+		System.out.println("Status:"+actual);
+		Assert.assertEquals(actual.trim(),"Institutes");
+	}
+	 
 
  }
 
 @When("admin select the coupons option")
 public void admin_select_the_coupons_option() {
-	ap.clickcouponsoption();
+	//ap.clickcouponsoption();
  }
 
-@When("verify  coupons details displayed correctly")
-public void verify_coupons_details_displayed_correctly() { 
-//	List<String>actualvalue=ap.statusmessagedisplayed();
-//	for(String actual:actualvalue) {
-//		System.out.println("Status:"+actual);
-//		Assert.assertEquals(actual.trim(),"Coupons");
-//	}
-	Assert.assertTrue(ap.issystemmoduledisplayed());
+@When("verify  coupons details displayed correctly {string}")
+public void verify_coupons_details_displayed_correctly(String string)  { 
+	List<String>actualvalue=ap.statusmessagedisplayed();
+	for(String actual:actualvalue) {
+		System.out.println("Status:"+actual);
+		Assert.assertEquals(actual.trim(),"Coupons");
+	}
+	 
  }
 
 
@@ -156,14 +155,14 @@ public void admin_select_the_certificates_option() {
 	ap.clickcertificatesoption();
  }
 
-@Then("verify  Certificates details displayed correctly")
-public void verify_certificates_details_displayed_correctly() {
-//	List<String>actualvalue=ap.statusmessagedisplayed();
-//	for(String actual:actualvalue) {
-//		System.out.println("Status:"+actual);
-//		Assert.assertEquals(actual.trim(),"Certificates");
-//	}
-	Assert.assertTrue(ap.issystemmoduledisplayed());
+@Then("verify  Certificates details displayed correctly {string}")
+public void verify_certificates_details_displayed_correctly(String Certificates)  {
+	List<String>actualvalue=ap.statusmessagedisplayed();
+	for(String actual:actualvalue) {
+		System.out.println("Status:"+actual);
+		Assert.assertEquals(actual.trim(),"Certificates");
+	}
+	 
 
  }
 @Then("admin verify the total auditcount and coutdetails displayed")

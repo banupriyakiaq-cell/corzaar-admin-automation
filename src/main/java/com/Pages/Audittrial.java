@@ -52,7 +52,7 @@ public WebElement InstitutesoptionElement;
 public WebElement invalidmessag;
 
 @FindBy(xpath = "//tbody/tr/td[3]//*[normalize-space()]")
-public WebElement displayedmessagElement;
+public List<WebElement>displayedmessagElement;
 
 @FindBy(xpath="//strong")
 public WebElement totalauditcount;
@@ -99,14 +99,14 @@ public void  clickInstitutesoption() {
 public String getinvalidmessage() {
 	return elementUtils.getText(invalidmessag);
 }
-//public List<String>statusmessagedisplayed() {
-//	List<String> statusList = new ArrayList<String>();
-//	for(WebElement element:displayedmessagElement) {
-//		String valueString = elementUtils.getText(element);
-//		statusList.add(valueString);
-//	}
-//	return statusList;
-//	}
+public List<String>statusmessagedisplayed() {
+	List<String> statusList = new ArrayList<String>();
+	for(WebElement element:displayedmessagElement) {
+		String valueString = elementUtils.getText(element);
+		statusList.add(valueString);
+	}
+	return statusList;
+	}
 public String getSearchfieldValue() {
 	return
  elementUtils.getAttributeValue(searchfield);
@@ -120,8 +120,5 @@ public int getDisplayedauditcount() {
 	return elementUtils.getSize(totalauditcountdetailsdisplayed);
 }
 
-public boolean issystemmoduledisplayed() {
-	return
-			elementUtils.isDisplayed(displayedmessagElement);
-}
+ 
 }

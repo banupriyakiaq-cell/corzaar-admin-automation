@@ -14,6 +14,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class AdminloginSteps {
+	 String enteredEmail;
+	String enterdpassword;
 	private static String title;
 	private Adminlogin log;
 	
@@ -34,11 +36,13 @@ public class AdminloginSteps {
 	
 	@When("user enter the {string}")
 	public void user_enter_the(String email) {
+		enteredEmail = email;
 		 log.enterEmailid(email);
 	}
 
 	@When("user enter the password {string}")
 	public void user_enter_the_password(String password) {
+		enterdpassword =password;
 	     log.enterPassword(password);
 	}
 
@@ -77,46 +81,14 @@ public class AdminloginSteps {
 	    } 
 	}
 	 
-	@When("admin enter the password {string}")
-	public void admin_enter_the_password(String password) {
-		log.enterPassword(password);
-		}
-	@When("click the aunthendicate with empty email")
-	public void click_the_aunthendicate_with_empty_email() {
-	    log.clickauthendicateWithEmptyEmail();
-	}
-	@Then("admin should see the email validation message")
-	public void admin_should_see_the_email_validation_message() {
-	     String actualmessage  =log.getEmailValidationMessage();
-	     System.out.println("Email ValidationMessage:"+actualmessage);
-	     Assert.assertNotNull(actualmessage,"Email Validation message is null");
-	     Assert.assertFalse(actualmessage.isEmpty(),"Email Validation message is empty");
-	}
-
-	@When("admin enter the  emailid {string}")
-	public void admin_enter_the_emailid(String email) {
-		 log.enterEmailid(email);
-
-	}
-	@When("click the aunthendicate with empty password")
-	public void click_the_aunthendicate_with_empty_password() {
-	    log. clickauthendicateWithEmptyPassword();
-	}
-	@Then("admin should see the password validation message")
-	public void admin_should_see_the_password_validation_message() {
-		String actualmessage  =log.getpasswordValidationMessage();
-	     System.out.println("Password ValidationMessage:"+actualmessage);
-	     Assert.assertNotNull(actualmessage,"Password Validation message is null");
-	     Assert.assertFalse(actualmessage.isEmpty(),"Password Validation message is empty");
-	}
-	
-	@When("admin enter the emailids {string}")
+    @When("admin enter the emailids {string}")
 	public void admin_enter_the_emailids(String email) {
-	     log.enterEmailid(email);
+ 	     log.enterEmailid(email);
 	}
 
 	@When("admin enter tha password {string}")
 	public void admin_enter_tha_password(String password) {
+ 
 	     log.enterPassword(password);
 	}
 
@@ -149,7 +121,19 @@ public class AdminloginSteps {
 	public void admin_enters_valid(String otp) {
 	      log.enterpasscode(otp);
 	}
+	@When("admin verifies email and password after back navigation")
+	public void admin_verifies_email_and_password_after_back_navigation()  {
+	     log.clickbackbutton();
+	     String actualEmail = log.getemailfieldvalue();
+	     String actualpassword =log.getpasswordfieldvalue();
+	     Assert.assertEquals(actualEmail ,enteredEmail,"Email value changed after back navigation");
+	     Assert.assertEquals(actualpassword, enterdpassword, "Password value changed after back navigation");
+         System.out.println("Email value is maintained after back navication");
+	     System.out.println("Password value is maintained after back navication");
+	     log.clickauthendicatebutton();
 
+	     
+	}
 	@When("admin click the verify button")
 	public void admin_click_the_verify_button()   {
 	   log.clicksubmitbutton();
@@ -166,6 +150,11 @@ public class AdminloginSteps {
 	   System.out.println("Actual Message:"+actualMessage);
 
 	    	Assert.assertEquals(actualMessage,message );
+	    }else if(status.equalsIgnoreCase("empty")) {
+	    	String actualMessage=log.getotpValidationMessage();
+	    	System.out.println("OTP Validation Message:"+actualMessage);
+	    	Assert.assertNotNull(actualMessage,"Otp Validation Message is null");
+	    	Assert.assertFalse(actualMessage.isEmpty(),"Otp validation message is empty");
 	    }
 	}
 

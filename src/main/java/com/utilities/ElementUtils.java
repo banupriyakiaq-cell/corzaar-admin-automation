@@ -85,6 +85,12 @@ public class ElementUtils {
 		webelement.sendKeys(s);
 
 	}
+	//
+	public int getElementcount(String xpath)
+	{
+		return
+				driver.findElements(By.xpath(xpath)).size();
+	}
 
 	//GETTEXT
 	public String getText(WebElement element) {

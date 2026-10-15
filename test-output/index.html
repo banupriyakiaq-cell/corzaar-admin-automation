@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite, 4 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\Kiaq_Lap_63\AppData\Local\Temp\testng-eclipse-254654096\testng-customsuite.xml</span>
+                    <span>C:\Users\Kiaq_Lap_63\AppData\Local\Temp\testng-eclipse-674320248\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,7 +92,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method, 1 failed,   </span>
+                    <span class="method-stats">5 methods, 4 failed,   1 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -103,10 +103,39 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.testRunner.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;dash board verification&quot;, &quot;dash board&quot;)">runScenario("dash board verification", "dash board")</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="com.testRunner.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;verify coupon approval module&quot;, &quot;Corzzar application&quot;)">runScenario("verify coupon approval module", "Corzzar application")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.testRunner.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;verify coupon approval module&quot;, &quot;Corzzar application&quot;)">runScenario("verify coupon approval module", "Corzzar application")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.testRunner.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;verify coupon approval module&quot;, &quot;Corzzar application&quot;)">runScenario("verify coupon approval module", "Corzzar application")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.testRunner.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;verify coupon approval module&quot;, &quot;Corzzar application&quot;)">runScenario("verify coupon approval module", "Corzzar application")</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Default_suite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.testRunner.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;verify total count and displayed count&quot;, &quot;Corzzar application&quot;)">runScenario("verify total count and displayed count", "Corzzar application")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -126,19 +155,82 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="runScenario(&quot;dash board verification&quot;, &quot;dash board&quot;)">
-                  </a> <!-- runScenario("dash board verification", "dash board") -->
+                  <a name="runScenario(&quot;verify coupon approval module&quot;, &quot;Corzzar application&quot;)">
+                  </a> <!-- runScenario("verify coupon approval module", "Corzzar application") -->
                   <span class="method-name">runScenario</span>
-                  <span class="parameters">("dash board verification","dash board")</span>
-                  <div class="stack-trace">java.lang.AssertionError: Dashboard Accredited Institutes count and Approved Institutes count mismatch expected [0] but found [1]
+                  <span class="parameters">("verify coupon approval module","Corzzar application")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Total course count did not decrease after deletion expected [0] but found [1]
 	at org.testng.Assert.fail(Assert.java:111)
 	at org.testng.Assert.failNotEquals(Assert.java:1590)
 	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
 	at org.testng.Assert.assertEquals(Assert.java:132)
 	at org.testng.Assert.assertEquals(Assert.java:1431)
 	at org.testng.Assert.assertEquals(Assert.java:1395)
-	at com.Stepdefanition.Dashboardstep.admin_verify_the_published_courses_and_displayed_count_details(Dashboardstep.java:89)
-	at ✽.admin verify the published courses and displayed count details(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/Dashboard.feature:9)
+	at com.Stepdefanition.coupon_approvalstep.admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data(coupon_approvalstep.java:94)
+	at ✽.admin click the approve button the coupon approved for admin side and updata current data(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/coupon_approval.feature:14)
+
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;verify coupon approval module&quot;, &quot;Corzzar application&quot;)">
+                  </a> <!-- runScenario("verify coupon approval module", "Corzzar application") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("verify coupon approval module","Corzzar application")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Total course count did not decrease after deletion expected [0] but found [1]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1431)
+	at org.testng.Assert.assertEquals(Assert.java:1395)
+	at com.Stepdefanition.coupon_approvalstep.admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data(coupon_approvalstep.java:94)
+	at ✽.admin click the approve button the coupon approved for admin side and updata current data(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/coupon_approval.feature:14)
+
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;verify coupon approval module&quot;, &quot;Corzzar application&quot;)">
+                  </a> <!-- runScenario("verify coupon approval module", "Corzzar application") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("verify coupon approval module","Corzzar application")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Total course count did not decrease after deletion expected [0] but found [1]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1431)
+	at org.testng.Assert.assertEquals(Assert.java:1395)
+	at com.Stepdefanition.coupon_approvalstep.admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data(coupon_approvalstep.java:94)
+	at ✽.admin click the approve button the coupon approved for admin side and updata current data(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/coupon_approval.feature:14)
+
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;verify coupon approval module&quot;, &quot;Corzzar application&quot;)">
+                  </a> <!-- runScenario("verify coupon approval module", "Corzzar application") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("verify coupon approval module","Corzzar application")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Total course count did not decrease after deletion expected [0] but found [1]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1431)
+	at org.testng.Assert.assertEquals(Assert.java:1395)
+	at com.Stepdefanition.coupon_approvalstep.admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data(coupon_approvalstep.java:94)
+	at ✽.admin click the approve button the coupon approved for admin side and updata current data(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/coupon_approval.feature:14)
 
 </div> <!-- stack-trace -->
                   <em>
@@ -147,10 +239,28 @@
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.testRunner.TestRunner</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;verify total count and displayed count&quot;, &quot;Corzzar application&quot;)">
+                  </a> <!-- runScenario("verify total count and displayed count", "Corzzar application") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("verify total count and displayed count","Corzzar application")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-passed -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Kiaq_Lap_63\AppData\Local\Temp\testng-eclipse-254654096\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\Kiaq_Lap_63\AppData\Local\Temp\testng-eclipse-674320248\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -207,16 +317,32 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(5);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'runScenario')
 data.setCell(0, 2, 'com.testRunner.TestRunner')
-data.setCell(0, 3, 10112);
+data.setCell(0, 3, 10455);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'runScenario')
+data.setCell(1, 2, 'com.testRunner.TestRunner')
+data.setCell(1, 3, 9501);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'runScenario')
+data.setCell(2, 2, 'com.testRunner.TestRunner')
+data.setCell(2, 3, 8167);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'runScenario')
+data.setCell(3, 2, 'com.testRunner.TestRunner')
+data.setCell(3, 3, 8110);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'runScenario')
+data.setCell(4, 2, 'com.testRunner.TestRunner')
+data.setCell(4, 3, 6947);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 10 seconds</span>
+              <span class="suite-total-time">Total running time: 43 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -244,18 +370,40 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">com.testRunner.TestRunner</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setUpClass(org.testng.TestRunner@22dc59b2)</span>
+                <span class="method-name">setUpClass(org.testng.TestRunner@924f3f1)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">runScenario("dash board verification", "dash board")</span>
-                <span class="method-start">475 ms</span>
+                <span class="method-name">runScenario("verify coupon approval module", "Corzzar application")</span>
+                <span class="method-start">528 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("verify coupon approval module", "Corzzar application")</span>
+                <span class="method-start">10036 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("verify coupon approval module", "Corzzar application")</span>
+                <span class="method-start">16986 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("verify coupon approval module", "Corzzar application")</span>
+                <span class="method-start">25158 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("verify total count and displayed count", "Corzzar application")</span>
+                <span class="method-start">33273 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownClass</span>
-                <span class="method-start">10603 ms</span>
+                <span class="method-start">43733 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

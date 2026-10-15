@@ -54,6 +54,9 @@ public class Adminlogin {
 	@FindBy(xpath = "//*[@class='text-xs font-bold text-indigo-950 dark:text-indigo-200']")
 	public WebElement FAPagetext;
 
+	@FindBy(xpath = "//*[@class='text-xs text-indigo-600 hover:underline font-bold flex items-center gap-1 cursor-pointer']")
+	public WebElement backbutton;
+
 	public String getAdminPageTitle() {
 		return driver.getTitle();
 
@@ -68,12 +71,14 @@ public class Adminlogin {
 	}
 
 	public void enterEmailid(String email) {
-		elementUtils.sendKeys(emailfield, email);
+ 		elementUtils.sendKeys(emailfield, email);
 	}
 
 	public void enterPassword(String password) {
+ 
 		elementUtils.sendKeys(passwordfield, password);
 	}
+	 
 
 	public void clickauthendicatebutton() {
 		elementUtils.scrollAndClick(authenticatebuttonElement);
@@ -115,7 +120,7 @@ public class Adminlogin {
 	public String getEmailValidationMessage() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		System.out.println("Email Value:"+emailfield.getAttribute("value"));
+		System.out.println("Email Value:" + emailfield.getAttribute("value"));
 		System.out.println("Email Required:" + js.executeScript("return arguments[0].required;", emailfield));
 		System.out.println("Email validity:" + js.executeScript("return arguments[0].validity.valid;", emailfield));
 		return (String) js.executeScript("return arguments[0].validationMessage;", emailfield);
@@ -132,14 +137,27 @@ public class Adminlogin {
 
 		return (String) js.executeScript("return arguments[0].validationMessage;", otpfield);
 	}
+
 	public void clickauthendicateWithEmptyEmail() {
 		elementUtils.clearField(emailfield);
 		elementUtils.scrollAndClick(authenticatebuttonElement);
-		
+
 	}
+
 	public void clickauthendicateWithEmptyPassword() {
 		elementUtils.clearField(passwordfield);
 		elementUtils.scrollAndClick(authenticatebuttonElement);
-		
+
+	}
+	
+	public void clickbackbutton() {
+		elementUtils.clickElement(backbutton);
+	}
+	
+	public String getemailfieldvalue() {
+		return elementUtils.getAttributeValue(emailfield);
+	}
+	public String getpasswordfieldvalue() {
+		return elementUtils.getAttributeValue(passwordfield);
 	}
 }

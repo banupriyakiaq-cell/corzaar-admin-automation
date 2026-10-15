@@ -57,7 +57,7 @@ public class coupon_approval {
 	public WebElement filterbutton;
 	
 	@FindBy(xpath =  "//table//tbody//tr/td[4]")
-	public  WebElement statusdetailed; 
+	public  List<WebElement> statusdetailed; 
 	
 	@FindBy (xpath="//strong")
 	public WebElement totalcoupon;
@@ -65,7 +65,8 @@ public class coupon_approval {
 	@FindBy(xpath = "//table/tbody/tr")
 	public List<WebElement> totalcoupondetails;
 	
-	 
+	 @FindBy(xpath="( //table//tbody//tr)[1]")
+	 public WebElement standaredrowfirst;
 	
 	 
 	 
@@ -107,14 +108,14 @@ public class coupon_approval {
 	public boolean isfilterbuttonDisplayed() {
 		return filterbutton.isDisplayed();
 	}
-//	public List<String>statusmessagedisplayed() {
-//		List<String> statusList = new ArrayList<String>();
-//		for(WebElement element:statusdetailed) {
-//			String valueString = elementUtils.getText(element);
-//			statusList.add(valueString);
-//		}
-//		return statusList;
-//		}
+	public List<String>statusmessagedisplayed() {
+		List<String> statusList = new ArrayList<String>();
+		for(WebElement element:statusdetailed) {
+			String valueString = elementUtils.getText(element);
+			statusList.add(valueString);
+		}
+		return statusList;
+		}
 	public String gettotalcoupontext() {
 		return elementUtils.getText(totalcoupon).trim();
 
@@ -127,9 +128,11 @@ public class coupon_approval {
 		return
 	 elementUtils.getAttributeValue(searchfield);
 	}
-	public boolean isstatusdetailsdisplayed() {
-		return
-				elementUtils.isDisplayed(statusdetailed);
-	}
+	public boolean isdisplayedselectedcoupon(String coupon) {
+		String xpath ="//table//tbody//tr[.//*[normalize-space()='\"+ couponName + \"']]";
+		return elementUtils.getElementcount(xpath)>0;
+	} 
+	
+	
 	
 }

@@ -101,16 +101,16 @@ public class institues_moderation_step {
 		Assert.assertEquals(actualValue, Place);
 	}
 
-	@When("admin select the approved option it should be displayed releted option")
-	public void admin_select_the_approved_option_it_should_be_displayed_releted_option() {
+	@When("admin select the {string} approved option it should be displayed releted option")
+	public void admin_select_the_approved_option_it_should_be_displayed_releted_option(String approved) {
+	    
 		inst.selecttheapproved();
-//		List<String> actualvalue = inst.getvaliddisplayedmessage();
-//		for (String actual : actualvalue) {
-//			System.out.println("Status:" + actual);
-//			Assert.assertEquals(actual.trim(), "approved");
-//		}
-		Assert.assertTrue(inst.isstatusdetailsdisplayed());
-
+		List<String> actualvalue = inst.getvaliddisplayedmessage();
+		for (String actual : actualvalue) {
+			System.out.println("Status:" + actual);
+			Assert.assertEquals(actual.trim(), "approved");
+		}
+ 
 	}
 
 	@When("admin click the reject button and verify the count details")
@@ -124,18 +124,22 @@ public class institues_moderation_step {
 		System.out.println("After Delete:" + afterDelete);
  
 	}
+	@When("admin verify rejected institutes is removed from the table")
+	public void admin_verify_rejected_institutes_is_removed_from_the_table() {
+	    boolean displayed =inst.isdisplayedapexinstitute();
+	    Assert.assertFalse(displayed,"Rejected istiutes is still displayed in the table");
+	}
 
-	@When("admin select the Pending option it should be displayed releted option")
-	public void admin_select_the_pending_option_it_should_be_displayed_releted_option() {
-//		inst.selectthepending();
-//
-//		List<String> actualvalue = inst.getvaliddisplayedmessage();
-//		for (String actual : actualvalue) {
-//			System.out.println("Status:" + actual);
-//			Assert.assertEquals(actual.trim(), "pending");
-//		}
-		Assert.assertTrue(inst.isstatusdetailsdisplayed());
+	@When("admin select the {string} pending option it should be displayed releted option")
+	public void admin_select_the_pending_option_it_should_be_displayed_releted_option(String pending) {
+		inst.selectthepending();
 
+		List<String> actualvalue = inst.getvaliddisplayedmessage();
+		for (String actual : actualvalue) {
+			System.out.println("Status:" + actual);
+			Assert.assertEquals(actual.trim(), "pending");
+		}
+ 
 	}
 
 	@When("admin click the approve button and verify the count details")
@@ -143,24 +147,30 @@ public class institues_moderation_step {
 
 		int beforeDelete = inst.gettotalcoursedetails();
 		System.out.println("Before Delete:" + beforeDelete);
-		//inst.clicktheapporve();
+		inst.clicktheapporve();
 		int afterDelete = inst.gettotalcoursedetails();
 		System.out.println("After Delete:" + afterDelete);
  
 		System.out.println("course count decressed correctly after deletion");
 
 	}
+	 
+	@When("admin verify institute status is Approved")
+	public void admin_verify_institute_status_is_approved() {
+		 boolean displayed =inst.isdisplayedmyinstitute();
+		    Assert.assertFalse(displayed,"approved myistiutes is still displayed in the table");
+	}
 
-	@When("admin select the Rejected option it should be displayed releted option")
-	public void admin_select_the_rejected_option_it_should_be_displayed_releted_option() {
+
+	@When("admin select the {string} rejected option it should be displayed releted option")
+	public void admin_select_the_rejected_option_it_should_be_displayed_releted_option(String rejected) {
 		inst.selectthereject();
-//		List<String> actualvalue = inst.getvaliddisplayedmessage();
-//		for (String actual : actualvalue) {
-//			System.out.println("Status:" + actual);
-//			Assert.assertEquals(actual.trim(), "rejected");
-//		}
-		Assert.assertTrue(inst.isstatusdetailsdisplayed());
-
+		List<String> actualvalue = inst.getvaliddisplayedmessage();
+		for (String actual : actualvalue) {
+			System.out.println("Status:" + actual);
+			Assert.assertEquals(actual.trim(), "rejected");
+		}
+ 
 	}
 
 	@When("admin select the again approve button and verify the count details")
@@ -175,16 +185,15 @@ public class institues_moderation_step {
 
 	}
 
-	@When("admin select the suspend option it should be displayed releted option")
-	public void admin_select_the_suspend_option_it_should_be_displayed_releted_option() {
-//		inst.selectthesuspended();
-//		List<String> actualvalue = inst.getvaliddisplayedmessage();
-//		for (String actual : actualvalue) {
-//			System.out.println("Status:" + actual);
-//			Assert.assertEquals(actual.trim(), "suspended");
-//		}
-		Assert.assertTrue(inst.isstatusdetailsdisplayed());
-
+	@When("admin select the {string} suspend option it should be displayed releted option")
+	public void admin_select_the_suspend_option_it_should_be_displayed_releted_option(String suspended) {
+		inst.selectthesuspended();
+		List<String> actualvalue = inst.getvaliddisplayedmessage();
+		for (String actual : actualvalue) {
+			System.out.println("Status:" + actual);
+			Assert.assertEquals(actual.trim(), "suspended");
+		}
+ 
 	}
 
 	@Then("admin again select the suspended button and verify the count details")

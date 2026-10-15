@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.devtools.latest.dom.model.NodeId;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -62,7 +63,7 @@ public class course_moderation {
 	public WebElement filterbutton;
 
 	@FindBy(xpath = "//table//tbody//tr/td[4]")
-	public WebElement statusdetailed;
+	public List<WebElement> statusdetailed;
 
 	@FindBy(xpath = " //strong")
 	public WebElement totalCourseCount;
@@ -73,11 +74,22 @@ public class course_moderation {
 	@FindBy(xpath = "//table/tbody/tr")
 	public List<WebElement> publisheddisplayedcourse;
 	
+	@FindBy(xpath = "(//*[@class='lucide lucide-external-link w-4 h-4'])[1]")
+	public WebElement navigationicon;
 	
-
+	@FindBy(xpath = "//h1")
+	public WebElement coursetitle;
+	
+	@FindBy(xpath="( //table//tbody//tr)[1]")
+	public WebElement selectedcouse; 
+	
+	@FindBy(xpath = "(//tr[.//span[normalize-space()='UI UX Design Fundamentals']])[1]")
+	public WebElement uIcoursElement;
+	
 	public String getcurrentUrl() {
 		return driver.getCurrentUrl();
 	}
+	
 
 	public void clearsearchbox() {
 		elementUtils.clearField(searchboxElement);
@@ -112,8 +124,7 @@ public class course_moderation {
 	}
 
 	public void clickrejectbutton() {
-//		WebElement row	=displayedCourse.get(0);
-//		WebElement rejectButton = row.findElement(By.xpath("(//button[normalize-space()='Reject'])[1]"));
+ 
 		elementUtils.clickElement(rejectbuttonElement);
 	}
 
@@ -124,15 +135,15 @@ public class course_moderation {
 	public boolean isfilterbuttonDisplayed() {
 		return filterbutton.isDisplayed();
 	}
-//
-//	public List<String> statusmessagedisplayed() {
-//		List<String> statusList = new ArrayList<String>();
-//		for (WebElement element : statusdetailed) {
-//			String valueString = elementUtils.getText(element);
-//			statusList.add(valueString);
-//		}
-//		return statusList;
-//	}
+
+	public List<String> statusmessagedisplayed() {
+		List<String> statusList = new ArrayList<String>();
+		for (WebElement element : statusdetailed) {
+			String valueString = elementUtils.getText(element);
+			statusList.add(valueString);
+		}
+		return statusList;
+	}
 
 	public String gettotalcoursetext() {
 		return elementUtils.getText(totalCourseCount).trim();
@@ -151,8 +162,22 @@ public class course_moderation {
 	 elementUtils.getAttributeValue(searchfieldElement);
 	}
 	
-	public boolean isstatusdetailsdisplayed() {
-		return
-				elementUtils.isDisplayed(statusdetailed);
-	}
-}
+	 public void clicknavigationicon() {
+		 elementUtils.clickElement(navigationicon);
+	 }
+	 public boolean isSelectedCourseDetailsDisplaed(String course) {
+		 return elementUtils.getText(coursetitle).trim().equalsIgnoreCase(course);
+	 }
+	 public String getselectedcoursename() {
+		 return elementUtils.getText(coursetitle).trim();
+	 }
+	 public boolean isdisplayedselectedcourse(String course) {
+			String xpath ="//table//tbody//tr[.//*[normalize-space()='\"+ courseName + \"']]";
+			return elementUtils.getElementcount(xpath)>0;
+		}
+	 public boolean isdisplayedUIcourses() {
+		 String xpath="(//tr[.//span[normalize-space()='UI UX Design Fundamentals']])[1]";
+		 return elementUtils.getElementcount(xpath)>0;
+	 }
+	 
+ }

@@ -58,6 +58,9 @@ public class refundclaim {
 	
 	@FindBy(id = "resolution-notes")
 	public WebElement rejectinputnotesfield;
+	
+	@FindBy(xpath = "//span[normalize-space()='pending']")
+	public List<WebElement>   pendingstatuscountElement;
 
 	public String getcurrentUrl(){
 		return driver.getCurrentUrl();
@@ -91,9 +94,7 @@ public class refundclaim {
    public void clickconfirmapprovebutton() {
 	elementUtils.clickElement(confirmapprovebutton);
 }
-//   public void enterrejectnotesfield(String  ) {
-//	   elementUtils.sendKeys(  rejectinputnotesfield,   );
-//   }
+ 
    public void clickrejectcancelbutton() {
 	   elementUtils.clickElement( rejectcancelbutton); 
    }
@@ -115,5 +116,8 @@ public class refundclaim {
    
    public String getApprovalnotesvalidationmessage() {
 	   return elementUtils.getText(Approvebutton);
+   }
+   public int getpendingstatuscount() {
+	   return elementUtils.getSize(pendingstatuscountElement);
    }
 }

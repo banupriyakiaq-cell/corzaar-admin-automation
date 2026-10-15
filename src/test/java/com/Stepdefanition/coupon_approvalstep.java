@@ -14,8 +14,9 @@ import com.utilities.ConstantUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+ public class coupon_approvalstep {
+	 String selectedcouponName;
 
-public class coupon_approvalstep {
 private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 	@Given("admin is on the dashboard page")
 	public void admin_is_on_the_dashboard_page()   {
@@ -46,8 +47,7 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
  	}
 	@When("admin verify the details {string} and {string}")
 	public void admin_verify_the_details_and(String Status, String Displayedmessage) {
-	  // String actualmessage=ca.invalidmessage();
-	   if(Status.equalsIgnoreCase("invalid")) {
+ 	   if(Status.equalsIgnoreCase("invalid")) {
 		   String actualmessage =ca.invalidmessage();
 		   Assert.assertEquals(actualmessage,  Displayedmessage);
 	   }else if (Status.equalsIgnoreCase("valid")) {
@@ -75,27 +75,33 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 	    ca.clickpendingoption();
 	}
 
-	@When("it should be displayed correct details")
-	public void it_should_be_displayed_correct_details() {
-//		 List<String>actualvalue=ca.statusmessagedisplayed();
-//			for(String actual:actualvalue) {
-//				System.out.println("Status:"+actual);
-//				Assert.assertEquals(actual.trim(),"pending");
-//	}
-		Assert.assertTrue(ca.isstatusdetailsdisplayed());
-
+	@When("it should be displayed correct details {string}")
+	public void it_should_be_displayed_correct_details(String string) {
+		 List<String>actualvalue=ca.statusmessagedisplayed();
+			for(String actual:actualvalue) {
+				System.out.println("Status:"+actual);
+				Assert.assertEquals(actual.trim(),"pending");
+	}
+ 
 	}
 	@When("admin click the approve button the coupon approved for admin side and updata current data")
 	public void admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data() {
 		int beforeDelete = ca.getDisplayedcouponcount();
 		System.out.println("Before Delete:" + beforeDelete);
-	     ca.clickapprovebutton();
+	     //ca.clickapprovebutton();
 		int afterDelete = ca.getDisplayedcouponcount();
 		System.out.println("After Delete:" + afterDelete);
 		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
 		System.out.println("course count decressed correctly after deletion");
+		 
 	     
 	}
+	@When("admin verify the the correct data is approved")
+	public void admin_verify_the_the_correct_data_is_approved() {
+		boolean displayed = ca. isdisplayedselectedcoupon(selectedcouponName);
+	    Assert.assertFalse(displayed," courses is still displayed in the table");
+}
+	 
 
 	@When("admin reject the coupon")
 	public void admin_reject_the_coupon() {
@@ -113,17 +119,17 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 	@When("admin select the approved button")
 	public void admin_select_the_approved_button() {
 	    ca.clickapprovedoption();
+	     
 	}
 
-	@When("the approved button displayed correct details")
-	public void the_approved_button_displayed_correct_details() {
-//		 List<String>actualvalue=ca.statusmessagedisplayed();
-//			for(String actual:actualvalue) {
-//				System.out.println("Status:"+actual);
-//				Assert.assertEquals(actual.trim(),"approved");
-	//} 
-		Assert.assertTrue(ca.isstatusdetailsdisplayed());
-
+	@When("the {string} button displayed correct details")
+	public void the_button_displayed_correct_details(String string) {
+		 List<String>actualvalue=ca.statusmessagedisplayed();
+			for(String actual:actualvalue) {
+				System.out.println("Status:"+actual);
+				Assert.assertEquals(actual.trim(),"approved");
+	} 
+ 
 		
 	}
 
@@ -140,20 +146,25 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 	    
 	    
 	}
+	
+	@When("admin verify the the correct data is reject")
+	public void admin_verify_the_the_correct_data_is_reject() {
+		boolean displayed = ca. isdisplayedselectedcoupon(selectedcouponName);
+	    Assert.assertFalse(displayed," courses is still displayed in the table");
+	}
  
 	@When("admin select the  rejected button")
 	public void admin_select_the_rejected_button() {
 	     ca.clickrejectedoption();
 	}
 
-	@When("the reject button should be displayed correct details")
-	public void the_reject_button_should_be_displayed_correct_details() {
-//		List<String>actualvalue=ca.statusmessagedisplayed();
-//		for(String actual:actualvalue) {
-//			System.out.println("Status:"+actual);
-//			Assert.assertEquals(actual.trim(),"rejected");}
-		Assert.assertTrue(ca.isstatusdetailsdisplayed());
-
+	@When("the {string} button should be displayed correct details")
+	public void the_button_should_be_displayed_correct_details(String string) {
+		List<String>actualvalue=ca.statusmessagedisplayed();
+		for(String actual:actualvalue) {
+			System.out.println("Status:"+actual);
+			Assert.assertEquals(actual.trim(),"rejected");}
+ 
 	}
 
 	@Then("admin click the apporve button and update current data")
@@ -165,8 +176,11 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 		System.out.println("After Delete:" + afterDelete);
 		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
 		System.out.println("course count decressed correctly after deletion");
-	     
-	     
+	     }
+	@Then("admin click the approve button and verify the details")
+	public void admin_click_the_approve_button_and_verify_the_details() {
+		boolean displayed = ca. isdisplayedselectedcoupon(selectedcouponName);
+	    Assert.assertFalse(displayed," courses is still displayed in the table");
 	}
 	@Then("admin verify the coupon approval count and displayed details              |")
 	public void admin_verify_the_coupon_approval_count_and_displayed_details() {
@@ -178,6 +192,7 @@ private coupon_approval ca =new coupon_approval(DriverFactory.getDriver());
 		System.out.println("DISPLAYED COURSE COUNT :" + displayedcount);
 		Assert.assertTrue(totalcount >= displayedcount, "Dispalyed courses count exceeds total course count");
 	}
+	 
 	 
 
 }

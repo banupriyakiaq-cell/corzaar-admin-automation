@@ -17,7 +17,8 @@ import io.cucumber.java.en.When;
 
 public class course_moderationstep {
 	private course_moderation cm = new course_moderation(DriverFactory.getDriver());
-
+	String parentwindow;
+	String selectedCourseName;
 	@Given("user is on tha dashboard page")
 	public void user_is_on_tha_dashboard_page() throws InterruptedException {
 
@@ -70,22 +71,41 @@ public class course_moderationstep {
 		Assert.assertTrue(cm.isfilterbuttonDisplayed());
 	}
 
-	@When("admin select the published option")
-	public void admin_select_the_published_option() {
+	@When("admin select the {string} published option")
+	public void admin_select_the_published_option(String published) {
 		cm.clickpublishoption();
+		List<String> actualvalue = cm.statusmessagedisplayed();
+		for (String actual : actualvalue) {
+			System.out.println("Status:" + actual);
+			Assert.assertEquals(actual.trim(), "published");
+		}
 	}
 
-	@When("the option filter the details and should be displayed correctly")
-	public void the_option_filter_the_details_and_should_be_displayed_correctly() {
-		Assert.assertTrue(cm.isstatusdetailsdisplayed());
-
+	@When("admin click the navigation icon")
+	public void admin_click_the_navigation_icon() {
+		parentwindow = DriverFactory.getDriver().getWindowHandle();
+		cm.clicknavigationicon();
+		for (String window : DriverFactory.getDriver().getWindowHandles()) {
+			if (!window.equals(parentwindow)) {
+				DriverFactory.getDriver().switchTo().window(window);
+				break;
+			}
+		}
 
 	}
-
+	@When("admin verify selected course details")
+	public void admin_verify_selected_course_details() {
+		String expectedcourse =cm.getselectedcoursename();
+	   Assert.assertTrue(cm.isSelectedCourseDetailsDisplaed(expectedcourse),"Selected Course details not displayed:"+expectedcourse);
+	   DriverFactory.getDriver().close();
+	   DriverFactory.getDriver().switchTo().window(parentwindow);
+	}
 	@When("admin select the reject button in displayed details")
 	public void admin_select_the_reject_button_in_displayed_details() {
+	String	selectedcourseName = cm.getselectedcoursename();
 		int beforeDelete = cm.getDisplayedcoursecount();
-		System.out.println("Before Delete:" + beforeDelete);
+ 		System.out.println("Before Delete:" + beforeDelete);
+
 		cm.clickrejectbutton();
 		int afterDelete = cm.getDisplayedcoursecount();
 		System.out.println("After Delete:" + afterDelete);
@@ -93,19 +113,23 @@ public class course_moderationstep {
 		System.out.println("course count decressed correctly after deletion");
 	}
 
-	@When("admin select the  underreview option")
-	public void admin_select_the_underreview_option() {
-		cm.clickunderreview();
+	@When("admin verify rejected  courses is removed from the table")
+	public void admin_verify_rejected_courses_is_removed_from_the_table() {
+		 boolean displayed = cm.isdisplayedselectedcourse(selectedCourseName);
+		    Assert.assertFalse(displayed," courses is still displayed in the table");
 	}
 
-	@When("admin select underreview option filter the details and should be displayed correctly")
-	public void admin_select_underreview_option_filter_the_details_and_should_be_displayed_correctly() {
-//		List<String> actualvalue = cm.statusmessagedisplayed();
-//		for (String actual : actualvalue) {
-//			System.out.println("Status:" + actual);
-//			Assert.assertEquals(actual.trim(), "under_review");
-//		}
-		Assert.assertTrue(cm.isstatusdetailsdisplayed());
+	 
+
+	@When("admin select the {string} underreview option")
+	public void admin_select_the_underreview_option(String under_review) {
+		cm.clickunderreview();
+	 
+		List<String> actualvalue = cm.statusmessagedisplayed();
+		for (String actual : actualvalue) {
+			System.out.println("Status:" + actual);
+			Assert.assertEquals(actual.trim(), "under_review");
+		}
 
 	}
 
@@ -120,7 +144,11 @@ public class course_moderationstep {
 		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
 		System.out.println("course count decressed correctly after deletion");
 	}
-
+	@When("admin verify rejected  courses is removed again from underreview the table")
+	public void admin_verify_rejected_courses_is_removed_again_from_underreview_the_table() {
+		 boolean displayed = cm.isdisplayedselectedcourse(selectedCourseName);
+		    Assert.assertFalse(displayed,"Api courses is still displayed in the table");
+	}
 	@When("admin select the publish option")
 	public void admin_select_the_publish_option() {
 		int beforeDelete = cm.getDisplayedcoursecount();
@@ -131,21 +159,19 @@ public class course_moderationstep {
 		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
 		System.out.println("course count decressed correctly after deletion");
 	}
-
-	@When("admin select the rejected option")
-	public void admin_select_the_rejected_option() {
-		cm.clickrejectoption();
+	@When("admin verify  published  courses is removed again from underreview the table")
+	public void admin_verify_published_courses_is_removed_again_from_underreview_the_table() {
+		 boolean displayed = cm.isdisplayedselectedcourse(selectedCourseName);
+		    Assert.assertFalse(displayed,"  courses is still displayed in the table");
 	}
-
-	@Then("admin select  rejected option filter the details and should be displayed correctly")
-	public void admin_select_rejected_option_filter_the_details_and_should_be_displayed_correctly() {
-//		List<String> actualvalue = cm.statusmessagedisplayed();
-//		for (String actual : actualvalue) {
-//			System.out.println("Status:" + actual);
-//			Assert.assertEquals(actual.trim(), "rejected");
-//		}
-		Assert.assertTrue(cm.isstatusdetailsdisplayed());
-
+	@When("admin select the {string} reject option")
+	public void admin_select_the_reject_option(String string) {
+		cm.clickrejectoption();
+		List<String> actualvalue = cm.statusmessagedisplayed();
+		for (String actual : actualvalue) {
+			System.out.println("Status:" + actual);
+			Assert.assertEquals(actual.trim(), "rejected");
+		}
 	}
 
 	@Then("admin verify total course count")

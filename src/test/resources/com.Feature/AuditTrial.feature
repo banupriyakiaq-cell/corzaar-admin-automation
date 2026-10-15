@@ -9,17 +9,17 @@ Feature: corzaar application
     And admin clear the search field
     And admin use the filter option
     And admin select the course option
-    And verify the displayed result detils
+    And verify the displayed result detils "course"
     And admin select the  payouts option
-    And verify  payout details displayed correctly
+    And verify  payout details displayed correctly "payouts"
     And admin select the  batches option
-    And verify  batches details displayed correctly
+    And verify  batches details displayed correctly "batches"
     And admin select the  institute option
-    And verify  institute details displayed correctly
+    And verify  institute details displayed correctly "institute"
     And admin select the coupons option
-    And verify  coupons details displayed correctly
+    And verify  coupons details displayed correctly "coupons"
     And admin select the Certificates option
-    Then verify  Certificates details displayed correctly
+    Then verify  Certificates details displayed correctly "Certificates"
 
     Examples:
       | SecurityAction   | Status  | expectedmessage             |

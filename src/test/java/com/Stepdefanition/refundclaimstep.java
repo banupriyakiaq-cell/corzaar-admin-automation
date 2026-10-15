@@ -33,13 +33,13 @@ private refundclaim rc = new refundclaim(DriverFactory.getDriver());
 	}
 	@When("Admin verify the totalrefunt count and displayed details")
 	public void admin_verify_the_totalrefunt_count_and_displayed_details() {
-//		String title = rc.gettotalrefundtext();
-//		System.out.println("Total Course text:" + title);
-//		int totalcount = Integer.parseInt(title.replaceAll("[^0-9]", ""));
-//		int displayedcount = rc.getDisplayedrefundcount();
-//		System.out.println("TOTAL COURSE COUNT:" + totalcount);
-//		System.out.println("DISPLAYED COURSE COUNT :" + displayedcount);
-//		Assert.assertTrue(totalcount >= displayedcount, "Dispalyed courses count exceeds total course count");
+		String title = rc.gettotalrefundtext();
+		System.out.println("Total Course text:" + title);
+		int totalcount = Integer.parseInt(title.replaceAll("[^0-9]", ""));
+		int displayedcount = rc.getDisplayedrefundcount();
+		System.out.println("TOTAL COURSE COUNT:" + totalcount);
+		System.out.println("DISPLAYED COURSE COUNT :" + displayedcount);
+		Assert.assertTrue(totalcount >= displayedcount, "Dispalyed courses count exceeds total course count");
 
 	}
 	

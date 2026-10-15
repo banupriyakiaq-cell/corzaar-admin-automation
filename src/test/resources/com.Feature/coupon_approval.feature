@@ -10,15 +10,18 @@ Feature: Corzzar application
     And admin clear the couponapproval search field in
     And admin using the filter option in search the details
     And admin select the pending option
-    And it should be displayed correct details
+    And it should be displayed correct details "pending"
     And admin click the approve button the coupon approved for admin side and updata current data
+    And admin verify the the correct data is approved
     And admin reject the coupon
     And admin select the approved button
-    And the approved button displayed correct details
+    And the "approved" button displayed correct details
     And admin reject the discound details and update current data
+    And admin verify the the correct data is reject
     And admin select the  rejected button
-    And the reject button should be displayed correct details
+    And the "reject" button should be displayed correct details
     Then admin click the apporve button and update current data
+    Then admin click the approve button and verify the details
 
     Examples:
       | Couponcode   | Status  | Displayedmessage  |

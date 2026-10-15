@@ -37,13 +37,15 @@ Feature: corzaar application
   Scenario: Filter option
     Given user is on the institues moderation page
     When admin click the institues moderation module
-    When admin select the approved option it should be displayed releted option
+    When admin select the "approved" approved option it should be displayed releted option
     And admin click the reject button and verify the count details
-    And admin select the Pending option it should be displayed releted option
+    And admin verify rejected institutes is removed from the table
+    And admin select the "Pending" pending option it should be displayed releted option
     And admin click the approve button and verify the count details
-    And admin select the Rejected option it should be displayed releted option
+    And admin verify institute status is Approved
+    And admin select the "Rejected" rejected option it should be displayed releted option
     And admin select the again approve button and verify the count details
-    And admin select the suspend option it should be displayed releted option
+    And admin select the "suspend" suspend option it should be displayed releted option
     Then admin again select the suspended button and verify the count details
 
   Scenario: verify total count and displayed count

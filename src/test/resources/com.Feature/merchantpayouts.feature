@@ -4,12 +4,12 @@ Feature: corzaar application
     Given admin is on tha dashboard page agin
     When admin click the merchant payment module
     And admin verify the record settlement popup window
-    And admin capture initial settlement counts
     And admin select the institute or merchant recipient
     And admin enter the settlement amount "<amount>"
     And admin enter the bank transfer details "<bankreceipet>"
     And admin enter the notes details "<notes>"
     And admin select the log settlement button
+    And verify the settlement failed message is displayed
     And admin click the record settlement open the popup window and click the close button
     And admin click the record settlement open the popup window and click the close icon
     And admin click the disburse payout option
@@ -24,4 +24,5 @@ Feature: corzaar application
       | amount | bankreceipet  | notes        |
       |        | NEFT-64451987 | Advanced fee |
       | 4500   |               | course fee   |
+      | -789   | NEFT-64451993 | course fee   |
       | 7566   | NEFT-64451992 | tutusion fee |

@@ -1,60 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="5" passed="1" failed="4" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-10-12T01:38:20 IST" name="Default suite" finished-at="2026-10-12T01:38:30 IST" duration-ms="10653">
+  <suite started-at="2026-10-15T10:10:26 IST" name="Default suite" finished-at="2026-10-15T10:11:10 IST" duration-ms="43795">
     <groups>
       <group name="cucumber">
         <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2026-10-12T01:38:20 IST" name="Default test" finished-at="2026-10-12T01:38:30 IST" duration-ms="10653">
+    <test started-at="2026-10-15T10:10:26 IST" name="Default test" finished-at="2026-10-15T10:11:10 IST" duration-ms="43795">
       <class name="com.testRunner.TestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-12T01:38:20 IST" name="setUpClass" finished-at="2026-10-12T01:38:20 IST" duration-ms="450" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-15T10:10:26 IST" name="setUpClass" finished-at="2026-10-15T10:10:27 IST" duration-ms="503" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@22dc59b2]]>
+                <![CDATA[org.testng.TestRunner@924f3f1]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-12T01:38:20 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-10-12T01:38:30 IST" duration-ms="10112" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-15T10:10:27 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-10-15T10:10:36 IST" duration-ms="9501" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA["dash board verification"]]>
+                <![CDATA["verify coupon approval module"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["dash board"]]>
+                <![CDATA["Corzzar application"]]>
               </value>
             </param>
           </params>
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Dashboard Accredited Institutes count and Approved Institutes count mismatch expected [0] but found [1]]]>
+              <![CDATA[Total course count did not decrease after deletion expected [0] but found [1]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Dashboard Accredited Institutes count and Approved Institutes count mismatch expected [0] but found [1]
+              <![CDATA[java.lang.AssertionError: Total course count did not decrease after deletion expected [0] but found [1]
 at org.testng.Assert.fail(Assert.java:111)
 at org.testng.Assert.failNotEquals(Assert.java:1590)
 at org.testng.Assert.assertEqualsImpl(Assert.java:150)
 at org.testng.Assert.assertEquals(Assert.java:132)
 at org.testng.Assert.assertEquals(Assert.java:1431)
 at org.testng.Assert.assertEquals(Assert.java:1395)
-at com.Stepdefanition.Dashboardstep.admin_verify_the_published_courses_and_displayed_count_details(Dashboardstep.java:89)
-at ✽.admin verify the published courses and displayed count details(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/Dashboard.feature:9)
+at com.Stepdefanition.coupon_approvalstep.admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data(coupon_approvalstep.java:94)
+at ✽.admin click the approve button the coupon approved for admin side and updata current data(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/coupon_approval.feature:14)
 ]]>
             </full-stacktrace>
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-12T01:38:30 IST" name="tearDownClass" finished-at="2026-10-12T01:38:30 IST" duration-ms="8" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-15T10:10:36 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-10-15T10:10:43 IST" duration-ms="6947" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["verify coupon approval module"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Corzzar application"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Total course count did not decrease after deletion expected [0] but found [1]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Total course count did not decrease after deletion expected [0] but found [1]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+at org.testng.Assert.assertEquals(Assert.java:132)
+at org.testng.Assert.assertEquals(Assert.java:1431)
+at org.testng.Assert.assertEquals(Assert.java:1395)
+at com.Stepdefanition.coupon_approvalstep.admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data(coupon_approvalstep.java:94)
+at ✽.admin click the approve button the coupon approved for admin side and updata current data(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/coupon_approval.feature:14)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-15T10:10:43 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-10-15T10:10:52 IST" duration-ms="8167" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["verify coupon approval module"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Corzzar application"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Total course count did not decrease after deletion expected [0] but found [1]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Total course count did not decrease after deletion expected [0] but found [1]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+at org.testng.Assert.assertEquals(Assert.java:132)
+at org.testng.Assert.assertEquals(Assert.java:1431)
+at org.testng.Assert.assertEquals(Assert.java:1395)
+at com.Stepdefanition.coupon_approvalstep.admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data(coupon_approvalstep.java:94)
+at ✽.admin click the approve button the coupon approved for admin side and updata current data(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/coupon_approval.feature:14)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-15T10:10:52 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-10-15T10:11:00 IST" duration-ms="8110" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["verify coupon approval module"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Corzzar application"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Total course count did not decrease after deletion expected [0] but found [1]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Total course count did not decrease after deletion expected [0] but found [1]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+at org.testng.Assert.assertEquals(Assert.java:132)
+at org.testng.Assert.assertEquals(Assert.java:1431)
+at org.testng.Assert.assertEquals(Assert.java:1395)
+at com.Stepdefanition.coupon_approvalstep.admin_click_the_approve_button_the_coupon_approved_for_admin_side_and_updata_current_data(coupon_approvalstep.java:94)
+at ✽.admin click the approve button the coupon approved for admin side and updata current data(file:///C:/Users/Kiaq_Lap_63/eclipse-workspace/Corzaar/src/test/resources/com.Feature/coupon_approval.feature:14)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-15T10:11:00 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-10-15T10:11:10 IST" duration-ms="10455" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["verify total count and displayed count"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Corzzar application"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.testRunner.TestRunner@81d9a72]" started-at="2026-10-15T10:11:10 IST" name="tearDownClass" finished-at="2026-10-15T10:11:10 IST" duration-ms="6" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

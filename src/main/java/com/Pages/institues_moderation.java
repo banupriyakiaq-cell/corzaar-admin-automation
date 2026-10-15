@@ -60,7 +60,7 @@ public class institues_moderation {
 	public WebElement displayedmessagElement;
 
 	@FindBy(xpath = "//table/tbody//tr/td[4]")
-	public WebElement textElement;
+	public List<WebElement> textElement;
 	
 	@FindBy(xpath = " //table/tbody//tr")
 	public List<WebElement> displayeddataElement;
@@ -77,6 +77,15 @@ public class institues_moderation {
 	@FindBy(xpath = "//table/tbody/tr")
 	public List<WebElement> totalinstitutedisplayed;
 
+	@FindBy(xpath = "//table/tbody/tr")
+	public List<WebElement> pendingInstituteRows;
+	
+	@FindBy(xpath="//tr[.//span[normalize-space()='Apex Institute of Technology']]")
+	public  WebElement apexinstitutElement;
+	
+	@FindBy(xpath="//tr[.//span[normalize-space()='My Institute']]")
+	public WebElement myinstitutElement;
+	
 	public void clicktheinstituesmoderation() {
 		elementUtils.scrollAndClick(institutesmoderation);
 	}
@@ -134,14 +143,14 @@ public class institues_moderation {
 		return elementUtils.getText(placeResult);
 	}
 
-//	public List<String> getvaliddisplayedmessage() {
-//		List<String> statusList = new ArrayList<String>();
-//		for (WebElement element : textElement) {
-//			String valueString = elementUtils.getText(element);
-//			statusList.add(valueString);
-//		}
-//		return statusList;
-//	}
+	public List<String> getvaliddisplayedmessage() {
+		List<String> statusList = new ArrayList<String>();
+		for (WebElement element : textElement) {
+			String valueString = elementUtils.getText(element);
+			statusList.add(valueString);
+		}
+		return statusList;
+	}
 
 	public int gettotalcoursedetails() {
 		return elementUtils.getSize(displayedcourse);
@@ -158,13 +167,22 @@ public class institues_moderation {
 		return
 	 elementUtils.getAttributeValue(searchfield );
 	}
-	public boolean isstatusdetailsdisplayed() {
-		return
-				elementUtils.isDisplayed(textElement);
-	}
+ 
 	public int getapprovedinstitutescount() {
 		 
 		 return elementUtils.getSize(displayeddataElement);
+	}
+	public int getPendingInstituteCount() {
+		return pendingInstituteRows.size();
+	}
+	
+	public boolean isdisplayedapexinstitute() {
+		String xpath ="//tr[.//span[normalize-space()='Apex Institute of Technology']]";
+		return elementUtils.getElementcount(xpath)>0;
+	}
+	public boolean isdisplayedmyinstitute() {
+		String xpath ="//tr[.//span[normalize-space()='My Institute']]";
+		return elementUtils.getElementcount(xpath)>0;
 	}
 	}
 
