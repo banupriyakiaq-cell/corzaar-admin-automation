@@ -21,8 +21,8 @@ Feature: corzaar application
     Then verify the settlement details should be added
 
     Examples:
-      | amount | bankreceipet  | notes        |
-      |        | NEFT-64451987 | Advanced fee |
-      | 4500   |               | course fee   |
-      | -789   | NEFT-64451993 | course fee   |
-      | 7566   | NEFT-64451992 | tutusion fee |
+      | amount                          | bankreceipet  | notes        |
+      |                                 | NEFT-64451987 | Advanced fee |
+      | -789                            | NEFT-64451993 | course fee   |
+      | 4500987878878777677686787878877 | NEFT-64451994 | course fee   |
+      | 7566                            | NEFT-64451992 | tutusion fee |
