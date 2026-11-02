@@ -1,5 +1,6 @@
 Feature: Corzzar application
-@coupon
+
+  @coupon
   Scenario Outline: verify coupon approval module
     Given admin is on the dashboard page
     When admin click the coupon approval module
@@ -25,11 +26,12 @@ Feature: Corzzar application
 
     Examples:
       | Couponcode   | Status  | Displayedmessage  |
-      | 12345yty       | invalid | No coupons found. |
+      | 12345yty     | invalid | No coupons found. |
       | @#@#$        | invalid | No coupons found. |
       | welcomeindia | invalid | No coupons found. |
-      | WELCOME25    | VALID   |                   |
-@count
+      | DABN2029     | VALID   |                   |
+
+  @count
   Scenario: verify total count and displayed count
     Given user is on the institues moderation page
     When admin click the institues moderation module

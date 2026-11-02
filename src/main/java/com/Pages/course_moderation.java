@@ -62,13 +62,13 @@ public class course_moderation {
 	@FindBy(xpath = "//*[@class='bg-surface-alt dark:bg-slate-800 rounded-xl px-3 py-2 text-xs font-semibold border border-border outline-none']")
 	public WebElement filterbutton;
 
-	@FindBy(xpath = "//table//tbody//tr/td[4]")
+	@FindBy(xpath = "//table//tbody//tr/td[position()=4]")
 	public List<WebElement> statusdetailed;
 
 	@FindBy(xpath = " //strong")
 	public WebElement totalCourseCount;
 
-	@FindBy(xpath = "//table/tbody/tr")
+	@FindBy(xpath = " //*[@class='divide-y divide-border dark:divide-dark-border text-sm']")
 	public List<WebElement> displayedCourse;
 
 	@FindBy(xpath = "//table/tbody/tr")
@@ -85,6 +85,13 @@ public class course_moderation {
 	
 	@FindBy(xpath = "(//tr[.//span[normalize-space()='UI UX Design Fundamentals']])[1]")
 	public WebElement uIcoursElement;
+	
+	@FindBy(xpath = "//table//tbody//tr[.//*[normalize-space()='\\\"+ courseName + \\\"']]")
+	public List<WebElement>selectedCourse;
+	
+	@FindBy(xpath = "(//tr[.//span[normalize-space()='UI UX Design Fundamentals']])[1]")
+	public List<WebElement>UiCourse;
+
 	
 	public String getcurrentUrl() {
 		return driver.getCurrentUrl();
@@ -171,13 +178,11 @@ public class course_moderation {
 	 public String getselectedcoursename() {
 		 return elementUtils.getText(coursetitle).trim();
 	 }
-	 public boolean isdisplayedselectedcourse(String course) {
-			String xpath ="//table//tbody//tr[.//*[normalize-space()='\"+ courseName + \"']]";
-			return elementUtils.getElementcount(xpath)>0;
+	 public boolean isdisplayedselectedcourse() {
+		return elementUtils.getSize(selectedCourse)>0;	 
 		}
 	 public boolean isdisplayedUIcourses() {
-		 String xpath="(//tr[.//span[normalize-space()='UI UX Design Fundamentals']])[1]";
-		 return elementUtils.getElementcount(xpath)>0;
+		  return elementUtils.getSize(UiCourse)>0;
 	 }
 	 
  }

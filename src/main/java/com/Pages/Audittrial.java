@@ -113,9 +113,7 @@ public String getSearchfieldValue() {
 }
 public String gettotalaudittext() {
 	return elementUtils.getText(totalauditcount).trim();
-
 }
-
 public int getDisplayedauditcount() {
 	return elementUtils.getSize(totalauditcountdetailsdisplayed);
 }

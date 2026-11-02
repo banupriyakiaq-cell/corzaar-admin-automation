@@ -10,11 +10,11 @@ Feature: corzaar application
     When admin clear the search field in institute module
 
     Examples:
-      | InstituteName          | status  | expected                      |
-      | 1234r      | invalid | No matching institutes found. |
-      | @#$%%#     | invalid | No matching institutes found. |
-      | kiaq                    | invalid | No matching institutes found. |
-      | Global Business Academy | valid   | Global Business Academy       |
+      | InstituteName | status  | expected                      |
+      | 1234r         | invalid | No matching institutes found. |
+      | @#$%%#        | invalid | No matching institutes found. |
+      | kiaq          | invalid | No matching institutes found. |
+      | My Institute  | valid   | My Institute                  |
 
   @place
   Scenario Outline: institues place
@@ -23,8 +23,8 @@ Feature: corzaar application
     When admin enters the in institute place "<Place>" search field
     And admin enter the field displayed correct matching details in
     Then admin should see institutes from place "<Place>" with "<Status>" and expected "<expected>"
-    And admin verift the details od search field "<Place>"
-    When admin clear the plase details in search field
+    And admin verift the details on search field "<Place>"
+    When admin clear the place details in search field
 
     Examples:
       | Place      | Status  | expected                      |
@@ -48,6 +48,7 @@ Feature: corzaar application
     And admin select the "suspend" suspend option it should be displayed releted option
     Then admin again select the suspended button and verify the count details
 
+  @totalcount
   Scenario: verify total count and displayed count
     Given user is on the institues moderation page
     When admin click the institues moderation module

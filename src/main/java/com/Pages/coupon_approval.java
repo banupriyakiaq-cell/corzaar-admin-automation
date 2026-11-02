@@ -56,17 +56,15 @@ public class coupon_approval {
 	@FindBy(xpath="//*[@class='bg-surface-alt dark:bg-slate-800 rounded-xl px-3 py-2 text-xs font-semibold border border-border outline-none']")
 	public WebElement filterbutton;
 	
-	@FindBy(xpath =  "//table//tbody//tr/td[4]")
+	@FindBy(xpath =  "//table//tbody//tr/td[position()=4]")
 	public  List<WebElement> statusdetailed; 
 	
 	@FindBy (xpath="//strong")
 	public WebElement totalcoupon;
 	
-	@FindBy(xpath = "//table/tbody/tr")
+	@FindBy(xpath = "//*[@class='transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/40']")
 	public List<WebElement> totalcoupondetails;
 	
-	 @FindBy(xpath="( //table//tbody//tr)[1]")
-	 public WebElement standaredrowfirst;
 	
 	 
 	 

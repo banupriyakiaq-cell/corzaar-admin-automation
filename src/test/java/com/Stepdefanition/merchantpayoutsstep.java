@@ -17,7 +17,8 @@ import io.cucumber.java.en.When;
 public class merchantpayoutsstep {
 	private merchantpayouts mp = new merchantpayouts(DriverFactory.getDriver());
 	String settlementAmount;
-
+	String bankreceipt;
+	String amount;
 	@Given("admin is on tha dashboard page agin")
 	public void admin_is_on_tha_dashboard_page_agin() {
 		DriverFactory.getDriver().get(ConfigReader.getProperty("url"));
@@ -42,8 +43,7 @@ public class merchantpayoutsstep {
 
 	@When("admin select the institute or merchant recipient")
 	public void admin_select_the_institute_or_merchant_recipient() {
-		mp.selecetinstitute();
-
+		mp.selectInstitute();
 	}
 
 	@When("admin enter the settlement amount {string}")
@@ -75,19 +75,23 @@ public class merchantpayoutsstep {
 
 	@When("verify the settlement failed message is displayed")
 	public void verify_the_settlement_failed_message_is_displayed() {
-		Assert.assertNotNull(settlementAmount,"Settlement amount is null");
-		Assert.assertFalse(settlementAmount.trim().isEmpty(),"Settlement amount is empty");
-		if(Double.parseDouble(settlementAmount.trim())<0) {
-			Assert.assertTrue(mp.issettlementFailedmessagedisplayed(),"Settlement failure message is not displayed");
-		}else {
-			Assert.assertTrue(mp.issettlementsuccessmessage(),"Settlement success message is not displayed");
+		Assert.assertNotNull(settlementAmount, "Settlement amount is null");
+		if (settlementAmount.trim().isEmpty()) {
+			Assert.assertTrue(mp.getsettlementamountvalidationmessage().length() > 0,
+					"Settlement amount validation message is not displayed");
+		} else if (Double.parseDouble(settlementAmount.trim()) < 0) {
+			Assert.assertTrue(mp.issettlementFailedmessagedisplayed(), "Settlement failure message is not displayed");
+		} else {
+			Assert.assertTrue(mp.issettlementsuccessmessage(), "Settlement success message is not displayed");
 		}
+		Assert.assertTrue(mp.issettlementFailedmessagedisplayed(),"Settlement Failed message is not displayed");
+		mp.clickclosebutton();
 
-		
 	}
 
 	@When("admin click the record settlement open the popup window and click the close button")
 	public void admin_click_the_record_settlement_open_the_popup_window_and_click_the_close_button() {
+
 		mp.clickrecordsettlement();
 		mp.clickclosebutton();
 	}
@@ -106,8 +110,7 @@ public class merchantpayoutsstep {
 
 	@When("admin again  select the merchant instittute recipient")
 	public void admin_again_select_the_merchant_instittute_recipient() {
-		mp.selecetinstitute();
-
+		mp.selectInstitute();
 	}
 
 	@When("admin again enter the settlement amount {string}")
@@ -137,9 +140,11 @@ public class merchantpayoutsstep {
 	@Then("verify the settlement details should be added")
 	public void verify_the_settlement_details_should_be_added() {
 		int historycount = mp.gethistoricalmerchanttabledetails();
-		System.out.println("Historical Settlement Count:" + historycount);
+		System.out.println("Historical Settlement Table Count:" + historycount);
 		Assert.assertTrue(historycount > 0, "Historical Settlement table has no records");
-		System.out.println("Active merchant count:" + mp.getactivemerchantdetails());
-	}
-
+		System.out.println("Active merchant Table count:" + mp.getactivemerchantdetails());
+	 
+boolean status=mp.verifyNewSettlement();
+Assert.assertTrue(status,"New settlement details not added");
+}
 }

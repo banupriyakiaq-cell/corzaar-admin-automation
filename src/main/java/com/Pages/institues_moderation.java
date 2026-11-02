@@ -56,28 +56,28 @@ public class institues_moderation {
 	@FindBy(xpath = "//td[normalize-space()='No matching institutes found.']")
 	public WebElement invalidmessagElement;
 
-	@FindBy(xpath = "//tbody/tr[1]/td[1]/div/span[contains(normalize-space(),'Global Business Academy')]")
+	@FindBy(xpath = "//tbody/tr[1]/td[1]/div/span[contains(normalize-space(),'My Institute')]")
 	public WebElement displayedmessagElement;
 
-	@FindBy(xpath = "//table/tbody//tr/td[4]")
+	@FindBy(xpath = "//table/tbody/tr//span[normalize-space()='approved']")
 	public List<WebElement> textElement;
 	
-	@FindBy(xpath = " //table/tbody//tr")
+	@FindBy(xpath = "//span[contains(@class,'bg-emerald-50') and normalize-space()='approved']")
 	public List<WebElement> displayeddataElement;
 
 	@FindBy(xpath = "//*[normalize-space()='Bengaluru']")
 	public WebElement placeResult;
 
-	@FindBy(xpath = "//table/tbody/tr")
+	@FindBy(xpath = "//tr[contains(@class,'transition-colors')]")
 	public List<WebElement> displayedcourse;
 
 	@FindBy(xpath = "//strong")
 	public WebElement totalinstitutescount;
 
-	@FindBy(xpath = "//table/tbody/tr")
+	@FindBy(xpath = "//tr[contains(@class,'transition-colors')]")
 	public List<WebElement> totalinstitutedisplayed;
 
-	@FindBy(xpath = "//table/tbody/tr")
+	@FindBy(xpath = "//table/tbody/tr//span[normalize-space()='pending']")
 	public List<WebElement> pendingInstituteRows;
 	
 	@FindBy(xpath="//tr[.//span[normalize-space()='Apex Institute of Technology']]")
@@ -85,6 +85,12 @@ public class institues_moderation {
 	
 	@FindBy(xpath="//tr[.//span[normalize-space()='My Institute']]")
 	public WebElement myinstitutElement;
+	
+	@FindBy(xpath="//tr[.//span[normalize-space()='My Institute']]")
+	public List<WebElement>deleteinstituterow;
+	@FindBy(xpath="//tr[.//span[normalize-space()='My Institute']]")
+	public List<WebElement>approvedinstituterow;
+	
 	
 	public void clicktheinstituesmoderation() {
 		elementUtils.scrollAndClick(institutesmoderation);
@@ -176,13 +182,11 @@ public class institues_moderation {
 		return pendingInstituteRows.size();
 	}
 	
-	public boolean isdisplayedapexinstitute() {
-		String xpath ="//tr[.//span[normalize-space()='Apex Institute of Technology']]";
-		return elementUtils.getElementcount(xpath)>0;
+	public boolean isdisplayedmyinstitutedelete() {
+		return !deleteinstituterow.isEmpty();
 	}
-	public boolean isdisplayedmyinstitute() {
-		String xpath ="//tr[.//span[normalize-space()='My Institute']]";
-		return elementUtils.getElementcount(xpath)>0;
+	public boolean isdisplayedmyinstituteapproved() {
+		return !approvedinstituterow.isEmpty();
 	}
 	}
 

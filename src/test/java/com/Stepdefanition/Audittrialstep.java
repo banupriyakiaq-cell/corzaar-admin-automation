@@ -18,8 +18,8 @@ import io.cucumber.java.en.When;
 public class Audittrialstep {
 
 private Audittrial ap = new  Audittrial(DriverFactory.getDriver());
-@Given("user is on the dashboard page againa")
-public void user_is_on_the_dashboard_page_againa()  {
+@Given("user is on the dashboard page again in")
+public void user_is_on_the_dashboard_page_again_in()  {
 	DriverFactory.getDriver().get(ConfigReader.getProperty("url"));
 	Adminlogin log = new Adminlogin(DriverFactory.getDriver());
 	log.clicktheadminbutton();
@@ -94,11 +94,7 @@ public void verify_payout_details_displayed_correctly(String payouts) {
 		System.out.println("Status:"+actual);
 		Assert.assertEquals(actual.trim(),"Payouts");
 	}
-	 
-
- }
-
- 
+}
 
 @When("admin select the  batches option")
 public void admin_select_the_batches_option(){
@@ -119,7 +115,7 @@ public void verify_batches_details_displayed_correctly(String string) {
 
 @When("admin select the  institute option")
 public void admin_select_the_institute_option() {
-	ap.clickInstitutesoption();
+	//ap.clickInstitutesoption();
  }
 
 @When("verify  institute details displayed correctly {string}")
@@ -129,15 +125,12 @@ public void verify_institute_details_displayed_correctly(String string){
 		System.out.println("Status:"+actual);
 		Assert.assertEquals(actual.trim(),"Institutes");
 	}
-	 
-
  }
 
 @When("admin select the coupons option")
 public void admin_select_the_coupons_option() {
-	//ap.clickcouponsoption();
+ap.clickcouponsoption();
  }
-
 @When("verify  coupons details displayed correctly {string}")
 public void verify_coupons_details_displayed_correctly(String string)  { 
 	List<String>actualvalue=ap.statusmessagedisplayed();
@@ -147,9 +140,6 @@ public void verify_coupons_details_displayed_correctly(String string)  {
 	}
 	 
  }
-
-
-
 @When("admin select the Certificates option")
 public void admin_select_the_certificates_option() {
 	ap.clickcertificatesoption();
@@ -165,6 +155,10 @@ public void verify_certificates_details_displayed_correctly(String Certificates)
 	 
 
  }
+@Given("user is on the dashboard page again in auditmodule")
+public void user_is_on_the_dashboard_page_again_in_auditmodule() {
+    
+}
 @Then("admin verify the total auditcount and coutdetails displayed")
 public void admin_verify_the_total_auditcount_and_coutdetails_displayed() {
 	String title = ap.gettotalaudittext();

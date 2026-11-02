@@ -27,7 +27,7 @@ public class AdminloginSteps {
 		title=log.getAdminPageTitle();
 		System.out.println("Page title is:"+title);
 	}
-	@When("user click the admin button")
+	@When("user click the admin button") 
 	public void user_click_the_admin_button() {
 	   log.clicktheadminbutton();
 	   title=log.getAdminPageTitle();
@@ -36,8 +36,13 @@ public class AdminloginSteps {
 	
 	@When("user enter the {string}")
 	public void user_enter_the(String email) {
-		enteredEmail = email;
-		 log.enterEmailid(email);
+		if(email==null||email.trim().isEmpty()) {
+			log.clearEmailField();
+		}else {
+			enteredEmail = email;
+			 log.enterEmailid(email);
+		}
+		 
 	}
 
 	@When("user enter the password {string}")
@@ -55,11 +60,11 @@ public class AdminloginSteps {
 
 
 	    if(status.equalsIgnoreCase("failed")) {
-	    	String actualMessage=log.getvalidationMessage();
+	    	String actualMessage=log.getvalidationMessage  ();
 	    System.out.println("Expected Message:"+message);
 	    System.out.println("Actual Message:"+message);
 
-	    Assert.assertEquals(actualMessage.trim(),message.trim(),"invalid lodin mismatch");
+	    Assert.assertEquals(actualMessage.trim(),message.trim(),"invalid login mismatch");
 	    }else if
 	    (status.equalsIgnoreCase("empty")) {
 	    	String actualMessage;
@@ -77,7 +82,7 @@ public class AdminloginSteps {
 	    System.out.println("validation Message:"+actualMessage);
 	    Assert.assertNotNull(actualMessage,message+"validation message null");
 			
-	    	 Assert.assertFalse(actualMessage.isEmpty(),message +"valiation message is empty");
+	    	 Assert.assertFalse(actualMessage.trim().isEmpty(),message +"valiation message is empty");
 	    } 
 	}
 	 
@@ -102,8 +107,8 @@ public class AdminloginSteps {
 	     log.clicksubmitbutton();
 	}
 
-	@Then("admin should see the otp validation messahe")
-	public void admin_should_see_the_otp_validation_messahe() {
+	@Then("admin should see the otp validation message")
+	public void admin_should_see_the_otp_validation_message() {
 		String actualmessage  =log.getotpValidationMessage();
 	     System.out.println("OTP ValidationMessage:"+actualmessage);
 	     Assert.assertNotNull(actualmessage,"Otp Validation message is null");

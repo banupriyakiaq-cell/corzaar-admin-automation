@@ -56,6 +56,9 @@ public class Adminlogin {
 
 	@FindBy(xpath = "//*[@class='text-xs text-indigo-600 hover:underline font-bold flex items-center gap-1 cursor-pointer']")
 	public WebElement backbutton;
+	
+	@FindBy(xpath="//span[normalize-space()='Invalid admin credentials']")
+	public WebElement invalidadmincredentials;
 
 	public String getAdminPageTitle() {
 		return driver.getTitle();
@@ -71,14 +74,27 @@ public class Adminlogin {
 	}
 
 	public void enterEmailid(String email) {
- 		elementUtils.sendKeys(emailfield, email);
+		elementUtils.sendKeys(emailfield, email);
+		System.out.println("Input email from Feature:[" + email + "]");
+		elementUtils.clearField(passwordfield);
+		if (email == null || email.trim().isEmpty()) {
+			passwordfield.sendKeys(email);
+		}
+		System.out.println(" email entred in browser:[" + emailfield.getAttribute("value") + "]");
 	}
 
 	public void enterPassword(String password) {
- 
-		elementUtils.sendKeys(passwordfield, password);
+		elementUtils.sendKeys(passwordfield,  password);
+
+		System.out.println("Input Password from Feature:[" + password + "]");
+		elementUtils.clearField(passwordfield);
+		elementUtils.sendKeys(passwordfield,  password);
+
+		if (password == null || password.trim().isEmpty()) {
+			passwordfield.sendKeys(password);
+		}
+		System.out.println("Password entred in browser:[" + passwordfield.getAttribute("value") + "]");
 	}
-	 
 
 	public void clickauthendicatebutton() {
 		elementUtils.scrollAndClick(authenticatebuttonElement);
@@ -93,7 +109,8 @@ public class Adminlogin {
 	}
 
 	public String getvalidationMessage() {
-		return elementUtils.getTextByXpath("//*[normalize-space()='Invalid admin credentials']");
+		WebElement element=elementUtils.waitForVisibilityOfElement(invalidadmincredentials);
+		return elementUtils.getText(invalidadmincredentials).trim();
 	}
 
 	public String getvalidationMessageotp() {
@@ -149,15 +166,24 @@ public class Adminlogin {
 		elementUtils.scrollAndClick(authenticatebuttonElement);
 
 	}
-	
+
 	public void clickbackbutton() {
 		elementUtils.clickElement(backbutton);
 	}
-	
+
 	public String getemailfieldvalue() {
-		return elementUtils.getAttributeValue(emailfield);
+		return emailfield.getAttribute("value");
 	}
+
 	public String getpasswordfieldvalue() {
-		return elementUtils.getAttributeValue(passwordfield);
+		return  passwordfield.getAttribute("value");
+	}
+
+	public String getemailValidationMessage() {
+		return emailfield.getAttribute("validationMeaasge");
+	}
+
+	public void clearEmailField() {
+		elementUtils.clearField(emailfield);
 	}
 }

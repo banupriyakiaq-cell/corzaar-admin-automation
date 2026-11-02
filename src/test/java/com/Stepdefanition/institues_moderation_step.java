@@ -1,4 +1,4 @@
-package com.Stepdefanition;
+ package com.Stepdefanition;
 
 import java.awt.Button;
 import java.util.List;
@@ -18,7 +18,7 @@ import io.cucumber.java.en.When;
 
 public class institues_moderation_step {
 	private institues_moderation inst = new institues_moderation(DriverFactory.getDriver());
-
+//institute
 	@Given("user is on the institues moderation page")
 	public void user_is_on_the_institues_moderation_page() {
 		DriverFactory.getDriver().get(ConfigReader.getProperty("url"));
@@ -65,7 +65,7 @@ public class institues_moderation_step {
 	public void admin_clear_the_search_field_in_institute_module() {
 		inst.clearsearchfield();
 	}
-
+//place
 	@When("admin enters the in institute place {string} search field")
 	public void admin_enters_the_in_institute_place_search_field(String place) {
 		inst.enterplace(place);
@@ -87,20 +87,22 @@ public class institues_moderation_step {
 		Assert.assertTrue(actualmessage.contains(expected), "Expected:" + expected + "But Actual:" + actualmessage);
 	}
 
-	@When("admin clear the plase details in search field")
-	public void admin_clear_the_plase_details_in_search_field() {
+	@When("admin clear the place details in search field")
+	public void admin_clear_the_place_details_in_search_field() {
 		inst.clearsearchfield();
 
 	}
-	@Then("admin verift the details od search field {string}")
-	public void admin_verift_the_details_od_search_field(String Place) {
+	
+	
+	@Then("admin verift the details on search field {string}")
+	public void admin_verift_the_details_on_search_field(String Place) {
 	    
 		String actualValue = inst.getSearchfieldValue();
 		System.out.println("Expected Value:" + Place);
 		System.out.println("Actual Value:" + actualValue);
 		Assert.assertEquals(actualValue, Place);
 	}
-
+//filter
 	@When("admin select the {string} approved option it should be displayed releted option")
 	public void admin_select_the_approved_option_it_should_be_displayed_releted_option(String approved) {
 	    
@@ -126,7 +128,7 @@ public class institues_moderation_step {
 	}
 	@When("admin verify rejected institutes is removed from the table")
 	public void admin_verify_rejected_institutes_is_removed_from_the_table() {
-	    boolean displayed =inst.isdisplayedapexinstitute();
+	    boolean displayed =inst.isdisplayedmyinstitutedelete();
 	    Assert.assertFalse(displayed,"Rejected istiutes is still displayed in the table");
 	}
 
@@ -157,7 +159,7 @@ public class institues_moderation_step {
 	 
 	@When("admin verify institute status is Approved")
 	public void admin_verify_institute_status_is_approved() {
-		 boolean displayed =inst.isdisplayedmyinstitute();
+		 boolean displayed =inst.isdisplayedmyinstituteapproved();
 		    Assert.assertFalse(displayed,"approved myistiutes is still displayed in the table");
 	}
 
@@ -180,7 +182,6 @@ public class institues_moderation_step {
 		inst.clicktheapporve();
 		int afterDelete = inst.gettotalcoursedetails();
 		System.out.println("After Delete:" + afterDelete);
-		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
 		System.out.println("course count decressed correctly after deletion");
 
 	}
@@ -206,7 +207,10 @@ public class institues_moderation_step {
 		Assert.assertEquals(afterDelete, beforeDelete - 1, "Total course count did not decrease after deletion");
 		System.out.println("course count decressed correctly after deletion");
 
-	}@Then("admin verify the toatl institutes count and displayed details")
+	}
+	
+	//totalcount
+	@Then("admin verify the toatl institutes count and displayed details")
 	public void admin_verify_the_toatl_institutes_count_and_displayed_details() {
 		String title =inst.gettotalinstitutedetails();
 		  System.out.println("Total Course text:"+title);

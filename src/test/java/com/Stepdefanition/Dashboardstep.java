@@ -43,9 +43,7 @@ public void user_verify_the_pending_course_cart_navigation() {
 	    int pendingcourse = cm.gettotalcoursedetails();
 	    System.out.println("Dashboard Count:"+dashboardcount);
 	    System.out.println("PendingCourse Count:"+ pendingcourse);
-
-	    Assert.assertEquals( pendingcourse,dashboardcount,"Dashboard Accredited Institutes count and Approved Institutes count mismatch"); 
- 	
+Assert.assertEquals(pendingcourse,Integer.parseInt(dashboardcount.trim()),"Dashboard Count and pending Course count Mismatch"); 	
 }
 
 @When("user verify the pending coupons cart navigation")

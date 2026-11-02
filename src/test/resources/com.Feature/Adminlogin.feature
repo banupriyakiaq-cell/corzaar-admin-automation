@@ -1,6 +1,7 @@
 Feature: corzaar application
 
-  Scenario Outline: Admin invalid
+  @admin
+  Scenario Outline: Admin credentials invalid
     Given user lanuch the application
     When user click the admin button
     When user enter the "<Email id>"
@@ -10,11 +11,14 @@ Feature: corzaar application
 
     Examples:
       | Email id           | Password   | status | Message                   |
-      |                    |            | empty  |   Email                   |
+      |                    |            | empty  | Email                     |
+      |                    | Admin@123  | empty  | Email                     |
+      | admin@corzaar.com  |            | empty  | password                  |
       | admin@corzaar.com  | Admin@1234 | failed | Invalid admin credentials |
       | admin@2corzaar.com | Admin@123  | failed | Invalid admin credentials |
 
-  Scenario Outline: Admin valid
+  @otp
+  Scenario Outline: Admin otp invalid
     Given user lanuch the application
     When user click the admin button
     When user enter the "<Email id>"
@@ -29,7 +33,8 @@ Feature: corzaar application
 
     Examples:
       | Email id          | Password  | otp    | valid   | Message           |
-      | admin@corzaar.com | Admin@123 |        | empty   |  Otp              |
+      | admin@corzaar.com | Admin@123 |        | empty   | Otp               |
+      | admin@corzaar.com | Admin@123 | 12     | invalid | Invalid admin OTP |
       | admin@corzaar.com | Admin@123 | asderf | invalid | Invalid admin OTP |
       | admin@corzaar.com | Admin@123 | 123467 | invalid | Invalid admin OTP |
       | admin@corzaar.com | Admin@123 | 123456 | valid   |                   |

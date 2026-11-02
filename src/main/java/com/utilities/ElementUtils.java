@@ -1,4 +1,4 @@
- package com.utilities;
+package com.utilities;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -34,7 +34,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ElementUtils {
 
-
 	private final WebDriver driver;
 	private final WebDriverWait wait;
 
@@ -43,6 +42,7 @@ public class ElementUtils {
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(ConstantUtils.EXPLICIT_WAIT_TIME));
 
 	}
+
 	public WebElement waitForElementToBeClickable(WebElement element) {
 
 		return wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -69,67 +69,69 @@ public class ElementUtils {
 
 	}
 
-
-	//CLICK
+	// CLICK
 	public void clickElement(WebElement element) {
 		WebElement webelement = waitForElementToBeClickable(element);
 		webelement.click();
 
 	}
 
-	//SENKEYS
+	// SENKEYS
 	public void sendKeys(WebElement element, String s) {
 		WebElement webelement = waitForVisibilityOfElement(element);
-	
+
 		webelement.clear();
 		webelement.sendKeys(s);
 
 	}
+
 	//
-	public int getElementcount(String xpath)
-	{
-		return
-				driver.findElements(By.xpath(xpath)).size();
+	public int getElementcount(String xpath) {
+		return driver.findElements(By.xpath(xpath)).size();
 	}
 
-	//GETTEXT
+	// GETTEXT
 	public String getText(WebElement element) {
-		WebElement webElement=waitForVisibilityOfElement(element);
- 		return element.getText().trim();
+		WebElement webElement = waitForVisibilityOfElement(element);
+		return element.getText().trim();
 
 	}
-	//ATTRIBUTE 
-	
+	// ATTRIBUTE
+
 	public String getAttributeValue(WebElement element) {
 		return element.getAttribute("value");
 	}
 	
-	//LIST
-	public List<WebElement>getElements(List<WebElement>elements){
-		for(WebElement element:elements)
-		waitForVisibilityOfElement(element);
-return elements;
+	public String getValidationMessage(WebElement element) {
+		return element.getAttribute("validationMessage");
 	}
-	
-	//GETTEXTBY XPATH
-public  String getTextByXpath(String xpath) {
-	WebElement element=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-	return element.getText();
-	
-}
-	//IS DISPLAYED
+
+	// LIST
+	public List<WebElement> getElements(List<WebElement> elements) {
+		for (WebElement element : elements)
+			waitForVisibilityOfElement(element);
+		return elements;
+	}
+
+	// GETTEXTBY XPATH
+	public String getTextByXpath(String xpath) {
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+		return element.getText();
+
+	}
+
+	// IS DISPLAYED
 	public boolean isDisplayed(WebElement element) {
 		WebElement webelement = waitForVisibilityOfElement(element);
 		return webelement.isDisplayed();
 
 	}
-	
+
 	public boolean isDisplayed(String xpath) {
-		return
-				driver.findElements(By.xpath(xpath)).isEmpty();
+		return driver.findElements(By.xpath(xpath)).isEmpty();
 	}
 
-	//GET TITLE
+	// GET TITLE
 	public String getTitle() {
 		return driver.getTitle();
 
@@ -148,7 +150,7 @@ public  String getTextByXpath(String xpath) {
 
 	}
 
-	//DROP DOWN (VALUE)
+	// DROP DOWN (VALUE)
 	public void dropdownValue(WebElement element, String value) {
 		Select select = new Select(element);
 		select.selectByValue(value);
@@ -156,20 +158,45 @@ public  String getTextByXpath(String xpath) {
 	}
 
 	// DROP DOWN (INDEX)
-	private void dropdownIndex(WebElement element, String s) {
-		Select select = new Select(element);
-		select.selectByValue(s);
+	public void dropdownIndex(WebElement element, int index) {
+		 Select select = new Select(element);
 
-	}
+		 
 
-	//MOVE TO THE ELEMENT (ACTION CLASS)
+		    System.out.println("Dropdown options count: "
+
+		            + select.getOptions().size());
+
+		 
+
+		    for (WebElement option : select.getOptions()) {
+
+		        System.out.println(
+
+		            "Text: " + option.getText()
+
+		            + " | Value: " + option.getAttribute("value")
+
+		        );
+
+		    }
+
+		 
+
+		    select.selectByIndex(index);
+
+		}
+
+	
+
+	// MOVE TO THE ELEMENT (ACTION CLASS)
 	public void moveToTheElement(WebElement element) {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).perform();
 
 	}
 
-	//CLEAR
+	// CLEAR
 	public void clearField(WebElement element) {
 		WebElement el = waitForVisibilityOfElement(element);
 		el.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -177,7 +204,7 @@ public  String getTextByXpath(String xpath) {
 
 	}
 
-	//GET TEXTS
+	// GET TEXTS
 	public List<String> getTexts(List<WebElement> elements) {
 		List<WebElement> el = waitForVisibilityOfAllElements(elements);
 		List<String> texts = new ArrayList<>();
@@ -195,41 +222,42 @@ public  String getTextByXpath(String xpath) {
 		return el.size();
 
 	}
+
 	// UPLOAD USING ROBOT (WHEN INPUT IS HIDDEN)
-		public void uploadUsingRobot(WebElement upload, String filePath) throws AWTException {
-			WebElement el = waitForElementToBeClickable(upload);
-			el.click();
-			StringSelection selection = new StringSelection(filePath);
-			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+	public void uploadUsingRobot(WebElement upload, String filePath) throws AWTException {
+		WebElement el = waitForElementToBeClickable(upload);
+		el.click();
+		StringSelection selection = new StringSelection(filePath);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
 
-			Robot robot = new Robot();
-			robot.delay(3000);
+		Robot robot = new Robot();
+		robot.delay(3000);
 
-			robot.keyPress(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_CONTROL);
-			robot.delay(500);
-			robot.keyPress(KeyEvent.VK_ENTER);
-			robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.delay(500);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
 
-		}
-	 
-	//IS ENABLED
+	}
+
+	// IS ENABLED
 
 	public boolean isEnabled(WebElement element) {
 		WebElement el = waitForVisibilityOfElement(element);
 		return el.isEnabled();
 
 	}
-	//IS SELECTED
+	// IS SELECTED
 
 	public boolean isSelected(WebElement element) {
 		WebElement el = waitForVisibilityOfElement(element);
 		return el.isSelected();
 
 	}
-	//IS ELEMENT PRESENT
+	// IS ELEMENT PRESENT
 
 	public boolean isElementPresent(By element) {
 		return driver.findElements(element).size() > 0;
@@ -244,7 +272,7 @@ public  String getTextByXpath(String xpath) {
 		}
 
 	}
-	//SELECT CHECK BOX
+	// SELECT CHECK BOX
 
 	public void selectCheckBox(WebElement cb) {
 		WebElement el = waitForElementToBeClickable(cb);
@@ -253,7 +281,7 @@ public  String getTextByXpath(String xpath) {
 		}
 
 	}
-	//UNSELECT CHECK BOX
+	// UNSELECT CHECK BOX
 
 	public void unselectCheckBox(WebElement cb) {
 		WebElement el = waitForElementToBeClickable(cb);
@@ -270,7 +298,7 @@ public  String getTextByXpath(String xpath) {
 		}
 
 	}
-	//  MOUSE HOVER TO ELEMENT
+	// MOUSE HOVER TO ELEMENT
 
 	public void hoverToElement(WebElement element1, WebElement element2) {
 		WebElement ele1 = waitForVisibilityOfElement(element1);
@@ -278,35 +306,35 @@ public  String getTextByXpath(String xpath) {
 		new Actions(driver).moveToElement(ele1).moveToElement(ele2).click().perform();
 
 	}
-	//SLIDER
+	// SLIDER
 
 	public void slider(WebElement element, int value1, int value2) {
 		WebElement el = waitForVisibilityOfElement(element);
 		new Actions(driver).dragAndDropBy(el, value1, value2).perform();
 
 	}
-	//DOUBLE CLICK
+	// DOUBLE CLICK
 
 	public void doubleClick(WebElement element) {
 		WebElement el = waitForVisibilityOfElement(element);
 		new Actions(driver).doubleClick(element).perform();
 
 	}
-	//RIGHT CLICK
+	// RIGHT CLICK
 
 	public void rightClick(WebElement element) {
 		WebElement el = waitForVisibilityOfElement(element);
 		new Actions(driver).contextClick(element).perform();
 
 	}
-	//JS CLICK
+	// JS CLICK
 
 	public void jsClick(WebElement element) {
 		WebElement el = waitForVisibilityOfElement(element);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click", element);
 
 	}
-	//JS SVG
+	// JS SVG
 
 	public void jsSVG(WebElement element) {
 		WebElement el = waitForVisibilityOfElement(element);
@@ -314,45 +342,42 @@ public  String getTextByXpath(String xpath) {
 				.executeScript("argument[0].dispatchEvent(new MouseEvent('click',{bubblers:true}));", element);
 
 	}
-	//SCROLL TO ELEMENT
+	// SCROLL TO ELEMENT
 
 	public void scrollToElement(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("argument[0].scrollIntoView({block:'center'});", element);
-		
 
 	}
-	//SCROLL AND CLICK
-	public void scrollAndClick(WebElement element)   {
-		WebElement button=waitForVisibilityOfElement(element);
-		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView({block:'center'});",button);
- 		 WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(15));
-		 wait.ignoring(ElementClickInterceptedException.class).until(d->{
-			 WebElement clickable = waitForElementToBeClickable(button);
-			 clickable.click();
-			 return true;
-		 });
-		 
-		 }
- 		 		
-		  
-	 
-	
-	//ACCEPT ALERT
+
+	// SCROLL AND CLICK
+	public void scrollAndClick(WebElement element) {
+		WebElement button = waitForVisibilityOfElement(element);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		wait.ignoring(ElementClickInterceptedException.class).until(d -> {
+			WebElement clickable = waitForElementToBeClickable(button);
+			clickable.click();
+			return true;
+		});
+
+	}
+
+	// ACCEPT ALERT
 
 	public void acceptAlert() {
 		Alert al = waitForAlertIsPresent();
 		al.accept();
 
 	}
-	//DISMISS ALERT
+	// DISMISS ALERT
 
 	public void dismissAlert() {
 		Alert al = waitForAlertIsPresent();
 		al.dismiss();
 
 	}
-	//TEXT ALERT
+	// TEXT ALERT
 
 	public void textAlert(String s) {
 		Alert al = waitForAlertIsPresent();
@@ -360,7 +385,7 @@ public  String getTextByXpath(String xpath) {
 
 	}
 
-	//VERIFY FILE DOWNLOAD
+	// VERIFY FILE DOWNLOAD
 	public boolean verifyFileDownload(String downloadPath, String expectedFileName) {
 		File folder = new File(downloadPath);
 		File[] files = folder.listFiles();
@@ -377,18 +402,18 @@ public  String getTextByXpath(String xpath) {
 
 	}
 
-	//FRAME
+	// FRAME
 	public void switchToFrame(WebElement element) {
 		WebElement el = waitForFrameIsPresent(element);
 
 	}
 
-	//PARENT FRAME
+	// PARENT FRAME
 	public void SwitchtoParentFrame() {
 		driver.switchTo().parentFrame();
 
 	}
-	//CHILD WINDOW SWITCH
+	// CHILD WINDOW SWITCH
 
 	public void childWindow(String pw) {
 		for (String window : driver.getWindowHandles()) {
@@ -400,13 +425,13 @@ public  String getTextByXpath(String xpath) {
 		}
 
 	}
-	//PARENT WINDOW SWITCH
+	// PARENT WINDOW SWITCH
 
 	public String parentWindow() {
 		return driver.getWindowHandle();
 
 	}
-	//CHILD WINDOW SWITCH BY URL
+	// CHILD WINDOW SWITCH BY URL
 
 	public void childWindowByUrl(String value) {
 		for (String window : driver.getWindowHandles()) {
@@ -417,20 +442,20 @@ public  String getTextByXpath(String xpath) {
 		}
 
 	}
-	//PARENT WINDOW SWITCH
+	// PARENT WINDOW SWITCH
 
 	public void switchToParentWindow(String pw) {
 		driver.switchTo().window(pw);
 
 	}
-	//CLOSE CURRENT WINDOW AND RETURNS TO PARENT
+	// CLOSE CURRENT WINDOW AND RETURNS TO PARENT
 
 	public void closeCurrentWindowandReturns(String pw) {
 		driver.close();
 		driver.switchTo().window(pw);
 
 	}
-	//CLOSE ALL CHILD WINDOW
+	// CLOSE ALL CHILD WINDOW
 
 	public void closeAllChildWindow(String pw) {
 		for (String window : driver.getWindowHandles()) {
@@ -442,7 +467,7 @@ public  String getTextByXpath(String xpath) {
 
 	}
 
-	//UPLOAD FILES
+	// UPLOAD FILES
 	public void uploadFile(WebElement element, String filename) {
 		WebElement el = waitForVisibilityOfElement(element);
 		String filepath = System.getProperty("user.dir") + File.separator + "uploads" + File.separator + filename;
@@ -453,7 +478,7 @@ public  String getTextByXpath(String xpath) {
 
 	}
 
-	//SCREENSHOTS
+	// SCREENSHOTS
 	public static String screenShot(WebDriver driver, String screenshotName) {
 		String timestamp = new SimpleDateFormat("yyyyMMdd HHmmss").format(new Date());
 		String filepath = System.getProperty("user.dir") + "/screenshots/" + screenshotName + "_" + timestamp + ".png";
@@ -469,9 +494,7 @@ public  String getTextByXpath(String xpath) {
 
 	}
 
-	 
-
-	//DOWNLOAD AND VERIFY
+	// DOWNLOAD AND VERIFY
 	public void downloadAndVerify(WebElement element, String path, String fileName) {
 		WebElement el = waitForElementToBeClickable(element);
 		el.click();
@@ -487,7 +510,7 @@ public  String getTextByXpath(String xpath) {
 
 	}
 
-	//AUTO COMPLETE SUGGESTION
+	// AUTO COMPLETE SUGGESTION
 	public void autoCompleteSuggestion(List<WebElement> suggestion, String options) {
 		List<WebElement> el = waitForVisibilityOfAllElements(suggestion);
 		List<WebElement> list = suggestion;
@@ -499,30 +522,31 @@ public  String getTextByXpath(String xpath) {
 		}
 
 	}
-	//SVG GRAPH
-	public void clickSvgElement(By locator,int index) {
-		List<WebElement> elements=driver.findElements(locator);
-		if(index < elements.size()) {
+
+	// SVG GRAPH
+	public void clickSvgElement(By locator, int index) {
+		List<WebElement> elements = driver.findElements(locator);
+		if (index < elements.size()) {
 			elements.get(index).click();
-		}else {
-			throw new RuntimeException("SVG element index not found:"+index);
+		} else {
+			throw new RuntimeException("SVG element index not found:" + index);
 		}
 	}
+
 	public String getElementText(WebElement element) {
 		return element.getText();
 	}
-	
-	//AFTERVALUELOADED
-public String getTextAfterValueLoaded( WebElement element) {
-	WebDriverWait wait =new WebDriverWait(driver, Duration.ofSeconds(20));
-	 return wait.ignoring(StaleElementReferenceException.class).     until(d-> {
-		 String text  =element.getText().trim();
-		 if( text .matches(".*TotalCourses:\\s*[1-9]\\d*.*") ) {
-			 return text;
-		 }
-			  return null;
-	 });
-			  
-	      
-}
+
+	// AFTERVALUELOADED
+	public String getTextAfterValueLoaded(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		return wait.ignoring(StaleElementReferenceException.class).until(d -> {
+			String text = element.getText().trim();
+			if (text.matches(".*TotalCourses:\\s*[1-9]\\d*.*")) {
+				return text;
+			}
+			return null;
+		});
+
+	}
 }
