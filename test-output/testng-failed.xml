@@ -6,7 +6,7 @@
       <class name="com.testRunner.TestRunner">
         <methods>
           <include name="setUpClass"/>
-          <include name="runScenario" invocation-numbers="33 34 35 38 39 40 41 42 43 14 15 16 17 18 19 24 25"/>
+          <include name="runScenario" invocation-numbers="4"/>
           <include name="tearDownClass"/>
         </methods>
       </class> <!-- com.testRunner.TestRunner -->

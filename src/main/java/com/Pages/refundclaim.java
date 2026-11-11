@@ -118,6 +118,8 @@ public class refundclaim {
 	   return elementUtils.getText(Approvebutton);
    }
    public int getpendingstatuscount() {
-	   return elementUtils.getSize(pendingstatuscountElement);
+	   int count = pendingstatuscountElement.size();
+	   System.out.println("Pending Refund element:"+count);
+	   return count;
    }
 }

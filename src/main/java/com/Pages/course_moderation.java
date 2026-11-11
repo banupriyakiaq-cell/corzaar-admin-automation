@@ -68,7 +68,7 @@ public class course_moderation {
 	@FindBy(xpath = " //strong")
 	public WebElement totalCourseCount;
 
-	@FindBy(xpath = " //*[@class='divide-y divide-border dark:divide-dark-border text-sm']")
+	@FindBy(xpath = " //*[@class='transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/40']")
 	public List<WebElement> displayedCourse;
 
 	@FindBy(xpath = "//table/tbody/tr")

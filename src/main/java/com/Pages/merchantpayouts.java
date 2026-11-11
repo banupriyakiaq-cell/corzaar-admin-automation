@@ -151,8 +151,13 @@ return wait.until(ExpectedConditions.visibilityOf(settlementfailemessag)).isDisp
 
 	}
 	public String getsettlementamountvalidationmessage() {
-		return(String)((JavascriptExecutor)driver).executeScript("return arguments[0].validationMessage;",amountfieldElement);
-	}
+		JavascriptExecutor js =(JavascriptExecutor)driver;
+
+
+		String message =(String)js.executeScript("return arguments[0].validationMessage;", amountfieldElement);
+		System.out.println("validation message:"+message);
+		return message;
+ 	}
 	public boolean verifyNewSettlement() {
 	if(this.settlementamount == null || 
 		this.settlementamount.trim().isEmpty()||

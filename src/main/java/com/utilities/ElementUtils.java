@@ -40,13 +40,9 @@ public class ElementUtils {
 	public ElementUtils(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(ConstantUtils.EXPLICIT_WAIT_TIME));
-
-	}
-
+		}
 	public WebElement waitForElementToBeClickable(WebElement element) {
-
 		return wait.until(ExpectedConditions.elementToBeClickable(element));
-
 	}
 
 	public WebElement waitForVisibilityOfElement(WebElement element) {

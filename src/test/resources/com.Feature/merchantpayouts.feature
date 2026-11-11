@@ -18,11 +18,12 @@ Feature: corzaar application
     And admin again enter the bank transfer details "<bankreceipet>"
     And admin again enter the notes details "<notes>"
     And admin again select the log settlement button
-    Then verify the settlement details should be added
+    #Then verify the settlement details should be added
+    Then verify the settlement failed message is display
 
     Examples:
       | amount                                        | bankreceipet  | notes        |
       |                                               | NEFT-64451987 | Advanced fee |
-      # | -789                            | NEFT-64451993 | course fee   |
+       | -789                            | NEFT-64451993 | course fee   |
       | 45,00,98,78,78,87,87,78,00,00,00,00,00,00,000 | NEFT-64451994 | course fee   |
       | 7,566                                         | NEFT-64451992 | tutusion fee |

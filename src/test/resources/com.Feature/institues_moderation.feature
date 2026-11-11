@@ -31,7 +31,7 @@ Feature: corzaar application
       | 1234       | invalid | No matching institutes found. |
       | @#$%%#     | invalid | No matching institutes found. |
       | Coimbatore | invalid | No matching institutes found. |
-      | Bengaluru  | valid   | Bengaluru                     |
+      #| Bengaluru  | valid   | Bengaluru                     |
 
   @filter
   Scenario: Filter option

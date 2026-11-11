@@ -22,8 +22,7 @@ public class DriverFactory {
 		System.out.println("browser value is:" + browser);
 		if (browser.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
-			 
-            ChromeOptions options = chromeOptionsSetup();
+			ChromeOptions options = chromeOptionsSetup();
          
  			tldriver.set(new ChromeDriver(options));
 

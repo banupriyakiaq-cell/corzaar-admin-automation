@@ -56,7 +56,7 @@ public class AdminloginSteps {
 	     log.clickauthendicatebutton();
 	}
 	@Then("user verify the {string} and {string}")
-	public void user_verify_the_and(String  status, String message) {
+	public void user_verify_the_and(String status, String message) {
 
 
 	    if(status.equalsIgnoreCase("failed")) {

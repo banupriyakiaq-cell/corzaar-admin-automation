@@ -29,6 +29,6 @@ Feature: corzaar application
       | Course submitted | valid   |                             |
 
   Scenario: Verify total audit and displated details
-    Given user is on the dashboard page again in auditmodule
+    Given user is on the dashboard page again in 
     When admin select the audit trail module
     Then admin verify the total auditcount and coutdetails displayed
