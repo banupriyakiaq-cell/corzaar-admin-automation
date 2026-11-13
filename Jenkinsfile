@@ -13,7 +13,7 @@ steps {
 }
 stage('Generate Allure HTML Report') {
  steps {
- bat 'allure generate target/allure-results --clean -o target/allure-report'
+ bat 'allure generate target/allure-results -o target/allure-report'
 }
 }
 stage('Publish Allure Report') {
