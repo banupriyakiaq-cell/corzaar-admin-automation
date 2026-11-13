@@ -1,49 +1,49 @@
  pipeline {
 agent any
- stages {
+stages {
 stage('Checkout') {
- steps {
- checkout scm
- }
- }
-  stage('Clean Old Allure Results') {
 steps {
- powershell '''
- $path = "AllureReports/allure-results"
-if (Test-Path $path) {
-Remove-Item $path -Recurse -Force
- }
- New-Item -ItemType Directory -Path $path -Force
- '''}
-  }
- stage('Automation Execution') {
- steps {
+checkout scm
+}
+}
+stage('Execute Test Cases') {
+steps {
  bat 'mvn clean test'
 }
- }
- stage('Generate Allure Report') {
+}
+stage('Generate Allure HTML Report') {
  steps {
- allure([
+ bat 'allure generate target/allure-results --clean -o target/allure-report'
+}
+}
+stage('Publish Allure Report') {
+steps {
+allure([
 includeProperties: false,
- results: [[path: 'AllureReports/allure-results']]
+ jdk: '',
+results: [[path: 'target/allure-results']]
 ])
+}
+}
+stage('Publish HTML Report') {
+ steps {
+  publishHTML(target: [
+  allowMissing: false,
+ alwaysLinkToLastBuild: true,
+ keepAll: true,
+ reportDir: 'target/allure-report',
+ reportFiles: 'index.html',
+reportName: 'Allure HTML Report'
+ ])
  }
-  stage('Generate Physical HTML Report') {
-   steps {
- bat"""
- "${tool'Allure'}\\bin\\allure.bat" generate AllureReports/allure-results --clean -o AllureReports/allure-report
- if not exist "AllureReports\\allure-report\\index.html" exit /b 1
- """
+ }
+ stage('Archive HTML Report') {
+ steps {
+ archiveArtifacts(
+artifacts: 'target/allure-report/**',
+allowEmptyArchive: false
+ )
    }
   }
- }
- }
-post {
- always {
-  archiveArtifacts(
-artifacts: 'AllureReports/**',
-allowEmptyArchive: true
-  )
- }  
 }
-}
+ }
