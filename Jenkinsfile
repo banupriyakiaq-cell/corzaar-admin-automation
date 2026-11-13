@@ -13,7 +13,7 @@ steps {
 }
 stage('Generate Allure HTML Report') {
  steps {
- bat 'allure generate target/allure-results -o target/allure-report'
+ bat 'allure generate AllureReports/allure-results -o target/allure-report'
 }
 }
 stage('Publish Allure Report') {
@@ -21,7 +21,7 @@ steps {
 allure([
 includeProperties: false,
  jdk: '',
-results: [[path: 'target/allure-results']]
+results: [[path: 'AllureReports/allure-results']]
 ])
 }
 }
