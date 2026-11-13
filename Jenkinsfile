@@ -26,24 +26,21 @@ stage('Generate Allure HTML Report') {
 stage('Generate Allure PDF Report') {
  steps {
  bat '''
-  set "CHROME=C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
-  if not exist "%CHROME%" (
- set "CHROME=C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-)
- if not exist "%CHROME%" (
- echo Chrome not found
+set "CHROME=C:\\Users\\Kiaq_Lap_63\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe"
+if not exist "%CHROME%" (
+echo Chrome not found
  exit /b 1
- )
+)
 if not exist "target\\allure-report\\index.html" (
  echo Allure HTML report not found
  exit /b 1
  )
- "%CHROME%" --headless --disable-gpu --no-sandbox --virtual-time-budget=15000 --print-to-pdf="%WORKSPACE%\\target\\Allure-Report.pdf" "file:///%WORKSPACE:\\=/%/target/allure-report/index.html"
- if not exist "target\\Allure-Report.pdf" (
+ "%CHROME%" --headless --disable-gpu --no-sandbox --print-to-pdf="%WORKSPACE%\\target\\Allure-report.pdf" "file:///%WORKSPACE%/target/allure-report/index.html"
+ if not exist "target\\Allure-report.pdf" (
  echo PDF generation failed
  exit /b 1
- )
-  '''
+  )
+ '''
  }
  }
  stage('Publish Allure Report') {
