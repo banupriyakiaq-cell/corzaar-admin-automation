@@ -1,15 +1,17 @@
-pipline{
-  agent any
-  stages{
-    stage('Checkout'){
-      steps{
-        checkout scm 
-      }
+pipeline {
+    agent any
+ 
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+ 
+        stage('Automation Execution') {
+            steps {
+                bat 'mvn clean test'
+            }
+        }
     }
-    stage('Automation Excution'){
-      steps{
-        bat 'mvn claen test'
-      }
-    }
-  }
 }
