@@ -30,10 +30,10 @@ includeProperties: false,
  }
   stage('Generate Physical HTML Report') {
    steps {
- bat '''
- allure generate AllureReports/allure-results --clean -o AllureReports/allure-report
+ bat"""
+ "${tool'Allure'}\\bin\\allure.bat" generate AllureReports/allure-results --clean -o AllureReports/allure-report
  if not exist "AllureReports\\allure-report\\index.html" exit /b 1
- '''
+ """
    }
   }
  }
@@ -41,7 +41,7 @@ includeProperties: false,
 post {
  always {
   archiveArtifacts(
-artifacts: 'AllureReports/allure-results/**',
+artifacts: 'AllureReports/**',
 allowEmptyArchive: true
   )
  }  
