@@ -1,32 +1,69 @@
  pipeline {
+
     agent any
+
  
+
     stages {
+
         stage('Checkout') {
+
             steps {
+
                 checkout scm
+
             }
+
         }
+
  
+
         stage('Automation Execution') {
+
             steps {
+
                 bat 'mvn clean test'
+
             }
+
         }
+
  
-        stage('Verify Allure Results') {
+
+        stage('Generate Allure Report') {
+
             steps {
-                bat 'dir AllureReports\\allure-results'
+
+                allure([
+
+                    includeProperties: false,
+
+                    results: [[path: 'AllureReports/allure-results']]
+
+                ])
+
             }
+
         }
+
     }
+
  
+
     post {
+
         always {
-            archiveArtifacts artifacts: 'AllureReports/allure-results/**',
-                             allowEmptyArchive: true
+
+            archiveArtifacts(
+
+                artifacts: 'AllureReports/allure-results/**',
+
+                allowEmptyArchive: true
+
+            )
+
         }
+
     }
+
 }
-
-
