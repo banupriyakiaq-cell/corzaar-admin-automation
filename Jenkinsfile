@@ -6,14 +6,15 @@ stage('Checkout') {
  checkout scm
  }
  }
-  stage('Clean old Allure Results'){
-   steps{
-    bat'''
-    if exist "AllureReport\\allure-results"
-rmdir /s /q "AllureReports\\allure-results"
-      mkdir "AllureReports\\allure-results"
-    '''
-   }
+  stage('Clean Old Allure Results') {
+steps {
+ powershell '''
+ $path = "AllureReports/allure-results"
+if (Test-Path $path) {
+Remove-Item $path -Recurse -Force
+ }
+ New-Item -ItemType Directory -Path $path -Force
+ '''}
   }
  stage('Automation Execution') {
  steps {
