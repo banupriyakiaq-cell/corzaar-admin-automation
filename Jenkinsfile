@@ -67,7 +67,7 @@ reportFiles: 'index.html',
  stage('Archive PDF Report') {
  steps {
   archiveArtifacts(
- artifacts: 'target/allure-report.pdf',
+ artifacts: 'target/Allure-report.pdf',
  fingerprint: true,
   allowEmptyArchive: false
 
