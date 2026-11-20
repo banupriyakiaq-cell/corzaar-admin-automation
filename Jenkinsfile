@@ -88,7 +88,7 @@ reportFiles: 'index.html',
      to:
      'banupriya.kiaq@gmail.com,banupriyav@kiaq.in',
      subject:'QA Automation Report - Build'+ 
-     env.BUILD-NUMBER +'-'+
+     env.BUILD_NUMBER +'-'+
      currentBuild.currentResult,
      mimeType:'text/html',
      body:"""
