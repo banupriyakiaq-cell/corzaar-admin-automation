@@ -1,13 +1,13 @@
  pipeline {
  agent any
 stages {
- //Checkout source code
+ //1.Checkout source code
  stage('Checkout') {
  steps {
 checkout scm
 }
 }
- //Execute automation test case
+ //2.Execute automation test case
  stage('Execute Test Cases') {
 steps {
  bat '''
@@ -18,7 +18,7 @@ steps {
  '''
  }
  }
- //Generate Allure HTML Report
+ //3.Generate Allure HTML Report
 stage('Generate Allure HTML Report') {
  steps {
  bat '''
@@ -26,7 +26,7 @@ stage('Generate Allure HTML Report') {
  '''
  }
  }
- //Generate Pdf Report using Chrome
+ //4.Generate Pdf Report using Chrome
 stage('Generate Allure PDF Report') {
  steps {
  bat '''
@@ -47,17 +47,15 @@ if not exist "target\\allure-report\\index.html" (
  '''
  }
  }
- //Publish Allure jenkins Report
+ //5.Publish Allure jenkins Report
  stage('Publish Allure Report') {
  steps {
-allure([
- includeProperties: false,
- jdk: '',
+allure ([commandline: 'Allure', includeProperties: false, jdk: '', resultPolicy: 'LEAVE_AS_IS',
  results: [[path: 'AllureReports/allure-results']]
-  ])
+         ])
  }
  }
- //Publish HTML Report in Jenkins
+ //6.Publish HTML Report in Jenkins
  stage('Publish HTML Report') {
  steps {
   publishHTML(target: [
@@ -70,7 +68,7 @@ reportFiles: 'index.html',
  ])
  }
  }
- //Archive pdf Report 
+ //7.Archive pdf Report 
  stage('Archive PDF Report') {
  steps {
   archiveArtifacts(
@@ -81,7 +79,7 @@ reportFiles: 'index.html',
  }
  }
 }
-//Email Notification
+//8.Email Notification
   post{
    always{
     emailext(
@@ -112,7 +110,7 @@ reportFiles: 'index.html',
      </body>
      </html>
      """,
-     //Attach PDF and HTML
+     //9.Attach PDF and HTML
      attachmentsPattern:
      'target/allure-report.pdf,target/allure-report'
      )
