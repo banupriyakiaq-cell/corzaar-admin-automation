@@ -26,14 +26,20 @@ stage('Generate Allure HTML Report') {
  '''
  }
  }
- //Generate Html zip for Email Attachement
+ //4.Generate Html zip for Email Attachement
  stage('Zip Allure HTML Report'){
   steps{
    bat'''
-   if exist target//allure-report.zip(
-   del target\\allure-report.zip)
+    if exist "target//allure-report.zip" (
+   del /f/q "target\\allure-report.zip")
    powershell -NoProfile -Command
-   "Compress-Archive -path 'target\\allure-report\\*' -DestinationPath 'target\\allure-report.zip'-Force"
+   "Compress-Archive -path 'target\\allure-report\\*'
+   -DestinationPath 'target\\allure-report.zip'
+   -Force"
+   if not exist "target\\allure-report.zip" (
+   echo HTML ZIP generation failed
+   exit/b 1 
+   )
    '''
   }
  }
