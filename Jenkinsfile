@@ -86,7 +86,7 @@ reportFiles: 'index.html',
    always{
     emailext(
      to:
-     'banupriya.kiaq@gmail.com,banupriyav@kiaq.in',
+     'banupriya.kiaq@gmail.com,banupriyav@kiaq.in,preetha.kiaq@gmail.com',
      subject:'QA Automation Report - Build'+ 
      env.BUILD_NUMBER +'-'+
      currentBuild.currentResult,
