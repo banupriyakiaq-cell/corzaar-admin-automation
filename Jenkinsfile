@@ -87,19 +87,22 @@ reportFiles: 'index.html',
     emailext(
      to:
      'banupriya.kiaq@gmail.com,banupriyav@kiaq.in',
-     subject:"QA Automation Report - Build $ {BUILD-NUMBER}-$
+     subject:"QA Automation Report - Build $ 
+     {env.BUILD-NUMBER}-$
      {currentBuild.currentResult}",
      mimeType:'text/html',
      body:"""
      <html>
      <body>
      <h2>QA Automation Report </h2>
-     <p><b>Project:</b>${JOB_NAME}</p>
-     <p><b>Build Number:</b>${BUILD_NUMBER}</P>
-     <p><b>Build Status:</b>${currentBuild.currentResult}</p>
-     <p><b>Environment:</b> QA </P>
-     <p><b>Build URL</b>a href="${BUILD_URL}"></p>${BUILD_URL}</a></p>
-     <h3>Attached Report </h3>
+     <p>Project:${env.JOB_NAME}</p>
+     <p>Build Number:${env.BUILD_NUMBER}</P>
+     <p>Build Status:${currentBuild.currentResult}</p>
+     <p>Environment:QA</P>
+     <p>
+     Jenkins Build:
+    <a href="${env.BUILD_URL}">View Build </a></p>
+     <h3>Attached Reports </h3>
      <ul>
      <li>Allure PDF Report </li>
      <li> Allure HTML Reprot </li>
