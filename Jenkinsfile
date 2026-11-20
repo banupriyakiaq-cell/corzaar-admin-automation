@@ -26,6 +26,17 @@ stage('Generate Allure HTML Report') {
  '''
  }
  }
+ //Generate Html zip for Email Attachement
+ stage('Zip Allure HTML Report'){
+  steps{
+   bat'''
+   if exist target//allure-report.zip(
+   del target\\allure-report.zip)
+   powershell -NoProfile -Command
+   "Compress-Archive -path 'target\\allure-report\\*' -DestinationPath 'target\\allure-report.zip'-Force"
+   '''
+  }
+ }
  //4.Generate Pdf Report using Chrome
 stage('Generate Allure PDF Report') {
  steps {
@@ -84,7 +95,7 @@ reportFiles: 'index.html',
    always{
     emailext(
      to:
-     'banupriya.kiaq@gmail.com,banupriyav@kiaq.in,preetha.kiaq@gmail.com',
+     'banupriya.kiaq@gmail.com,bharathkumar.kiaq@gmail.com',
      subject:'QA Automation Report - Build'+ 
      env.BUILD_NUMBER +'-'+
      currentBuild.currentResult,
@@ -112,7 +123,7 @@ reportFiles: 'index.html',
      """,
      //9.Attach PDF and HTML
      attachmentsPattern:
-     'target/allure-report.pdf,target/allure-report'
+     'target/Allure-report.pdf,target/allure-report.zip'
      )
    }
   }
