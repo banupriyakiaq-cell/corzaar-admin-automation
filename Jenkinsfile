@@ -87,14 +87,14 @@ reportFiles: 'index.html',
     emailext(
      to:
      'banupriya.kiaq@gmail.com,banupriyav@kiaq.in',
-     subject:"QA Automation Report - Build $ 
-     {env.BUILD-NUMBER}-$
-     {currentBuild.currentResult}",
+     subject:'QA Automation Report - Build'+ 
+     env.BUILD-NUMBER +'-'+
+     currentBuild.currentResult,
      mimeType:'text/html',
      body:"""
      <html>
      <body>
-     <h2>QA Automation Report </h2>
+     <h2>QA Automation Execution Report </h2>
      <p>Project:${env.JOB_NAME}</p>
      <p>Build Number:${env.BUILD_NUMBER}</P>
      <p>Build Status:${currentBuild.currentResult}</p>
