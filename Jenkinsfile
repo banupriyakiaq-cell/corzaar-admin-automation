@@ -114,5 +114,8 @@ reportFiles: 'index.html',
      """,
      //Attach PDF and HTML
      attachmentsPattern:
-     'target/allure-report.pdf,target/allure-report.zip'
+     'target/allure-report.pdf,target/allure-report'
+     )
+   }
+  }
 }
