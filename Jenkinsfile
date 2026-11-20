@@ -1,11 +1,13 @@
  pipeline {
  agent any
 stages {
+ //Checkout source code
  stage('Checkout') {
  steps {
 checkout scm
 }
 }
+ //Execute automation test case
  stage('Execute Test Cases') {
 steps {
  bat '''
@@ -16,6 +18,7 @@ steps {
  '''
  }
  }
+ //Generate Allure HTML Report
 stage('Generate Allure HTML Report') {
  steps {
  bat '''
@@ -23,6 +26,7 @@ stage('Generate Allure HTML Report') {
  '''
  }
  }
+ //Generate Pdf Report using Chrome
 stage('Generate Allure PDF Report') {
  steps {
  bat '''
@@ -43,6 +47,7 @@ if not exist "target\\allure-report\\index.html" (
  '''
  }
  }
+ //Publish Allure jenkins Report
  stage('Publish Allure Report') {
  steps {
 allure([
@@ -52,6 +57,7 @@ allure([
   ])
  }
  }
+ //Publish HTML Report in Jenkins
  stage('Publish HTML Report') {
  steps {
   publishHTML(target: [
@@ -64,19 +70,46 @@ reportFiles: 'index.html',
  ])
  }
  }
+ //Archive pdf Report 
  stage('Archive PDF Report') {
  steps {
   archiveArtifacts(
  artifacts: 'target/Allure-report.pdf',
  fingerprint: true,
   allowEmptyArchive: false
-
-                )
-
-            }
-
-        }
-
-    }
-
+ )
+ }
+ }
+}
+//Email Notification
+  post{
+   always{
+    emailext(
+     to:
+     'banupriya.kiaq@gmail.com,banupriyav@kiaq.in',
+     subject:"QA Automation Report - Build $ {BUILD-NUMBER}-$
+     {currentBuild.currentResult}",
+     mimeType:'text/html',
+     body:"""
+     <html>
+     <body>
+     <h2>QA Automation Report </h2>
+     <p><b>Project:</b>${JOB_NAME}</p>
+     <p><b>Build Number:</b>${BUILD_NUMBER}</P>
+     <p><b>Build Status:</b>${currentBuild.currentResult}</p>
+     <p><b>Environment:</b> QA </P>
+     <p><b>Build URL</b>a href="${BUILD_URL}"></p>${BUILD_URL}</a></p>
+     <h3>Attached Report </h3>
+     <ul>
+     <li>Allure PDF Report </li>
+     <li> Allure HTML Reprot </li>
+     </ul>
+     <p>Regards,<br>
+     QA Automation Team </p>
+     </body>
+     </html>
+     """,
+     //Attach PDF and HTML
+     attachmentsPattern:
+     'target/allure-report.pdf,target/allure-report.zip'
 }
