@@ -27,21 +27,17 @@ stage('Generate Allure HTML Report') {
  }
  }
  //4.Generate Html zip for Email Attachement
- stage('Zip Allure HTML Report'){
-  steps{
-   bat'''
-    if exist "target//allure-report.zip" 
-   del /f/q "target\\allure-report.zip"
-   powershell -NoProfile -Command -ExecutionPolicy Bypass -Command
-   "Compress-Archive -path 'target\\allure-report\\*'
-   -DestinationPath 'target\\allure-report.zip'
-   -Force"
-   if not exist "target\\allure-report.zip" 
-   
-   exit/b 1 
-   
-   '''
-  }
+ stage('Zip Allure HTML Report') {
+
+    steps {
+bat '''
+ if not exist "target\\allure-report" (
+ echo Allure report folder not found
+ exit /b 1
+ )
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Compress-Archive -Path 'target/allure-report/*' -DestinationPath 'target/allure-report.zip' -Force"
+ '''
+}
  }
  //4.Generate Pdf Report using Chrome
 stage('Generate Allure PDF Report') {
@@ -101,7 +97,7 @@ reportFiles: 'index.html',
    always{
     emailext(
      to:
-     'banupriya.kiaq@gmail.com,bharathkumar.kiaq@gmail.com',
+     'banupriya.kiaq@gmail.com',
      subject:'QA Automation Report - Build'+ 
      env.BUILD_NUMBER +'-'+
      currentBuild.currentResult,
