@@ -30,16 +30,16 @@ stage('Generate Allure HTML Report') {
  stage('Zip Allure HTML Report'){
   steps{
    bat'''
-    if exist "target//allure-report.zip" (
-   del /f/q "target\\allure-report.zip")
-   powershell -NoProfile -Command
+    if exist "target//allure-report.zip" 
+   del /f/q "target\\allure-report.zip"
+   powershell -NoProfile -Command -ExecutionPolicy Bypass -Command
    "Compress-Archive -path 'target\\allure-report\\*'
    -DestinationPath 'target\\allure-report.zip'
    -Force"
-   if not exist "target\\allure-report.zip" (
-   echo HTML ZIP generation failed
+   if not exist "target\\allure-report.zip" 
+   
    exit/b 1 
-   )
+   
    '''
   }
  }
